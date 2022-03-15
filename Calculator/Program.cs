@@ -12,6 +12,7 @@
             Console.WriteLine("Enter numbers to be added: ");
             array numbersToAdd= int.Parse(Console.ReadLine()); 
             Console.WriteLine(numbersToAdd[]);
+            Testing
         }
     }
 }
