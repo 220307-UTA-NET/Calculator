@@ -1,2 +1,2 @@
 ﻿
-Console.WriteLine("This is Phirith's Calculator );
+Console.WriteLine("This is Phirith's Calculator");
