@@ -25,15 +25,27 @@
 						return;
                     case 1:
                         AddInput();
+                        Console.WriteLine("Press enter to continue");
+					    Console.ReadLine();
+					    Console.Clear();
                         break;
                     case 2:
                         SubtractInput();
+                        Console.WriteLine("Press enter to continue");
+					    Console.ReadLine();
+					    Console.Clear();
                         break;
                     case 3:
                         DivideInput();
+                        Console.WriteLine("Press enter to continue");
+					    Console.ReadLine();
+					    Console.Clear();
                         break;
                     case 4:
                         MultiplyInput();
+                        Console.WriteLine("Press enter to continue");
+					    Console.ReadLine();
+					    Console.Clear();
                         break;
                 }
             }
@@ -63,27 +75,80 @@
             }
 
             //iterate over array and add the values together
+            string mathLine="equation";
             int solution=0;
             for(int c=0; c<numbers.Length; c++)
             {
-                solution = numbers[c] + solution;
+                if(c==0)
+                {
+                    solution = numbers[c] + solution;
+                    mathLine = numbers[c].ToString();
+                }
+                else
+                {
+                    solution = numbers[c] + solution;
+                    mathLine = mathLine+ " + " +numbers[c].ToString();
+                }
             }
-
-            Console.WriteLine("The sum of your numbers is: "+solution);
+            Console.Clear();
+            Console.WriteLine(mathLine+ " = "+solution);
         }
 
         static void SubtractInput()
         {
+            List<int> numbers = new List<int>(); 
+            
+            Console.WriteLine("Enter a number to subtract from: ");
+            numbers.Add(int.Parse(Console.ReadLine()));
+        
+            Console.WriteLine("Enter a number(s) to subtract with: \nEnter \"Done\" when you have finished inputing numbers ");
+            
+            while (true)
+            {
+                string nextInput=Console.ReadLine();
+                if (nextInput.ToUpper() =="DONE")
+                {
+                    break;
+                }
+                else
+                {
+                    numbers.Add(int.Parse(nextInput));
+                }
+            }
+            
+            
+            string mathLine="equation";
+            int solution=0;
+            int [] array = numbers.ToArray();
+            //Console.WriteLine(array.Length);
+
+            for(int i=1; i<array.Length; i++)
+            {
+                if (i==1)
+                {
+                    solution = array[0]-array[1];
+                    mathLine = array[0].ToString()+ " - " +array[1].ToString();
+                    //Console.WriteLine(solution);
+                }
+                else
+                {
+                    solution = solution-array[i];
+                    mathLine =mathLine +" - "+ array[i].ToString();
+                    //Console.WriteLine(solution);
+                }
+            }
+            Console.Clear();
+            Console.WriteLine(mathLine+" = "+solution);
 
         }
         static void DivideInput()
         {
-
+            Console.WriteLine("In Progess, come back later.");
         }
 
         static void MultiplyInput()
         {
-
+            Console.WriteLine("In Progess, come back later.");
         }
     }
 }
