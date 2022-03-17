@@ -13,6 +13,7 @@
                 Console.WriteLine("[2] - Subtract numbers");
                 Console.WriteLine("[3] - Divide numbers");
                 Console.WriteLine("[4] - Multiply numbers");
+                Console.WriteLine("[5] - Multiple Operations");
                 Console.WriteLine("[0] - Exit");
 
                 int menu = int.Parse(Console.ReadLine());
@@ -47,6 +48,28 @@
 					    Console.ReadLine();
 					    Console.Clear();
                         break;
+                    case 5:
+                        Console.Clear();
+                        Console.WriteLine("Enter the first number to operate on");
+                        double first= double.Parse(Console.ReadLine());
+                        first=(MultipleOperation(first));
+                        while (true)
+                        {                           
+                            Console.WriteLine("Type \"DONE\" to finish. \nPress Enter to perform another operation on your solution.");
+                                            
+                            if (Console.ReadLine().ToUpper() == "DONE" )
+                            {
+                               break; 
+                            }
+                            else
+                            {
+                                first=(MultipleOperation(first));
+                            }   
+                        }
+					    Console.Clear();
+                        break;
+
+
                 }
             }
         }
@@ -149,6 +172,67 @@
         static void MultiplyInput()
         {
             Console.WriteLine("In Progess, come back later.");
+        }
+
+        static double MultipleOperation(double first)
+        {
+            double[] numbers=new double[2];
+            double solution=0;
+
+            //Console.WriteLine("Enter the first number to operate on");
+            numbers [0]= first;
+            
+            Console.WriteLine("Choose an operation and press Enter.");
+            Console.WriteLine("[+] - Add");
+            Console.WriteLine("[-] - Subtract");
+            Console.WriteLine("[/] - Divide");
+            Console.WriteLine("[*] - Multiply"); 
+
+            while (true)
+            {
+                string menu = Console.ReadLine();
+					
+				switch(menu)
+                {
+                    case "+":
+                        Console.WriteLine("Enter your next number");
+                        numbers [1]= int.Parse(Console.ReadLine());
+                        solution=numbers[0]+numbers[1];
+                        Console.Clear();
+                        Console.WriteLine(numbers[0]+" + "+numbers[1]+ " = "+solution);
+                        numbers [0]=numbers[0]+numbers[1];
+                        return numbers[0];
+                    case "-":
+                        Console.WriteLine("Enter your next number");
+                        numbers [1]= int.Parse(Console.ReadLine());
+                        solution=numbers[0]-numbers[1];
+                        Console.Clear();
+                        Console.WriteLine(numbers[0]+" - "+numbers[1]+ " = "+solution);
+                        numbers [0]=numbers[0]-numbers[1];   
+                        return numbers[0]; 
+                    case "/":
+                        Console.WriteLine("Enter your next number");
+                        numbers [1]= int.Parse(Console.ReadLine());
+                        solution=numbers[0]/numbers[1];
+                        Console.Clear();
+                        Console.WriteLine(numbers[0]+" / "+numbers[1]+ " = "+solution);
+                        numbers [0]=numbers[0]/numbers[1];
+                        return numbers[0];
+                    case "*":
+                        Console.WriteLine("Enter your next number");
+                        numbers [1]= int.Parse(Console.ReadLine());
+                        solution=numbers[0]*numbers[1];
+                        Console.Clear();
+                        Console.WriteLine(numbers[0]+" * "+numbers[1]+ " = "+solution);
+                        numbers [0]=numbers[0]*numbers[1];
+                        return numbers[0];
+                }
+        
+            }
+
+
+
+
         }
     }
 }
