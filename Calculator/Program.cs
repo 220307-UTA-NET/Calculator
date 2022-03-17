@@ -1,4 +1,6 @@
-﻿namespace Calculator
+﻿//using System.Text.RegularExpressions;
+
+namespace Calculator
 {
     class Program
     {
@@ -14,6 +16,7 @@
                 Console.WriteLine("[3] - Divide numbers");
                 Console.WriteLine("[4] - Multiply numbers");
                 Console.WriteLine("[5] - Multiple Operations");
+                Console.WriteLine("[6} - Input Equation Line");
                 Console.WriteLine("[0] - Exit");
 
                 int menu = int.Parse(Console.ReadLine());
@@ -68,8 +71,14 @@
                         }
 					    Console.Clear();
                         break;
-
-
+                    case 6:
+                        
+                        InputFullEquation();
+                        Console.WriteLine("Press enter to continue");
+					    Console.ReadLine();
+					    Console.Clear();
+                        break;
+                        
                 }
             }
         }
@@ -164,6 +173,7 @@
             Console.WriteLine(mathLine+" = "+solution);
 
         }
+
         static void DivideInput()
         {
             Console.WriteLine("In Progess, come back later.");
@@ -234,5 +244,134 @@
 
 
         }
+
+        static void InputFullEquation()
+        {
+            //Get equation string
+            Console.WriteLine("Enter your equation: \nPlease only use 0-9 as values and + - / * as operands.");
+            string input = Console.ReadLine();
+
+            //remover any potential whitespaces
+            string strippedInput = String.Concat(input.Where(c => !Char.IsWhiteSpace(c)));
+          
+            //Parse out values separated by operands
+            //Convert to a list of decimals
+            List<string> listValues = new List<string>();
+            listValues = strippedInput.Split('+','-','/','*').ToList(); 
+            List<decimal> listValuesDec = listValues.ConvertAll<decimal>(Convert.ToDecimal);
+
+
+            char [] charArr = input.ToCharArray(); //array of entire string
+            char [] operands = new char [charArr.Length-listValues.Count]; //set length of operators array
+
+            for (int i=0, c=0; i<charArr.Length; i++)
+            {
+                if (charArr[i] == '+'||charArr[i] == '-'||charArr[i] == '/'||charArr[i] == '*')
+                {
+                    operands[c] = charArr[i];
+                    c++;
+                }   
+            }
+            
+            List<char> operandsList = operands.OfType<char>().ToList();
+
+            //Iterate through operands and evalute * and /
+            for(int j=0; j<operands.Length; j++)
+            {
+                while (true)
+                {
+                    for (int i=0, c=1; i<operandsList.Count; i++, c++)
+                    {
+                        if (operandsList[i] == '*')
+                        {
+                            listValuesDec[i]=Multiply(listValuesDec[i],listValuesDec[c]);
+                            listValuesDec.RemoveAt(c);
+                            operandsList.RemoveAt(i);
+                            break; 
+                        }
+                        else if (operandsList[i] == '/')
+                        {
+                            listValuesDec[i]=Divide(listValuesDec[i],listValuesDec[c]);
+                            listValuesDec.RemoveAt(c);
+                            operandsList.RemoveAt(i); 
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+            
+            //Output answer and return if length of listValuesList is 1
+            if( listValuesDec.Count==1)
+            {
+                foreach(decimal i in listValuesDec)
+                {
+                    Console.WriteLine(i);
+                    return;
+                }
+            }
+
+
+            //Iterate though operands and evaluate + and -
+            int newOperandQuantity = operandsList.Count;
+             for(int j=0; j<newOperandQuantity; j++)
+            {
+                while (true)
+                {
+                    for (int i=0, c=1; i<operandsList.Count; i++, c++)
+                    {
+                        if (operandsList[i] == '+')
+                        {
+                            listValuesDec[i]=Add(listValuesDec[i],listValuesDec[c]);
+                            listValuesDec.RemoveAt(c);
+                            operandsList.RemoveAt(i);
+                        }
+                        else if (operandsList[i] == '-')
+                        {
+                            listValuesDec[i]=Subtract(listValuesDec[i],listValuesDec[c]);
+                            listValuesDec.RemoveAt(c);
+                            operandsList.RemoveAt(i);
+                        }
+                    }
+                    break;
+                }
+            }
+
+            //Output answer and return if length of listValuesList is 1
+             if( listValuesDec.Count==1)
+            {
+                foreach(decimal i in listValuesDec)
+                {
+                    Console.WriteLine(i);
+                    return;
+                }
+            }
+
+            
+        }
+
+                static decimal Add(decimal a, decimal b)
+                {
+                    decimal c = a+b;
+                    return c;
+                }
+
+                static decimal Subtract(decimal a, decimal b)
+                {
+                    decimal c = a-b;
+                    return c;
+                }
+
+                static decimal Multiply(decimal a, decimal b)
+                {
+                    decimal c = a*b;
+                    return c;
+                }
+
+                static decimal Divide(decimal a, decimal b)
+                {
+                    decimal c = a/b;
+                    return c;
+                }
     }
 }
