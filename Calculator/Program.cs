@@ -54,7 +54,11 @@ namespace Calculator
                     case 5:
                         Console.Clear();
                         Console.WriteLine("Enter the first number to operate on");
-                        double first= double.Parse(Console.ReadLine());
+                        if (!Double.TryParse(Console.ReadLine(), out double first))
+                        {
+                            Console.Write("Error not a valid input\n");
+                            break;
+                        }
                         first=(MultipleOperation(first));
                         while (true)
                         {                           
@@ -249,11 +253,19 @@ namespace Calculator
         {
             //Get equation string
             Console.WriteLine("Enter your equation: \nPlease only use 0-9 as values and + - / * as operands.");
-            string input = Console.ReadLine();
+            string? input = Console.ReadLine();
 
             //remover any potential whitespaces
             string strippedInput = String.Concat(input.Where(c => !Char.IsWhiteSpace(c)));
-          
+            
+            //Check equation for division by Zero
+            bool divideByZero = strippedInput.Contains("/0");
+            if (divideByZero)
+            {
+            Console.WriteLine("Cannot divide by zero, result will be infinite");
+            return;
+            }
+            
             //Parse out values separated by operands
             //Convert to a list of decimals
             List<string> listValues = new List<string>();
