@@ -1,76 +1,56 @@
 ﻿class Calculator
 {
-
-    public static long ConvertToNumbers(string numberString)
-    {
-        var numbers = Regex.Matches(numberString, @"\w+").Cast<Match>()
-            .Select(m => m.value.ToLowerInvariant())
-            .Where(v => numberTable.ContainsKey(v))
-            .select(v => numberTable[v]);
-        long acc = 0, total 0L;
-        foreach(var n in numbers)
-        {
-            if(n >=1000)
-            {
-                total += acc*n;
-                acc = 0;
-            }
-            else if(n >= 1000)
-            {
-                total +=acc*n;
-                acc = 0;
-            }
-            else if (n >=100)
-            {
-                acc *= n;
-            }
-            else acc += n;
-        }
-        return (total + acc) * (numberString.startswith("minus",
-        StringComparison.InvariantcultureIgnoreCase) ? -1 : 1);     
-    }
-
     static void Main(string[] args)
     {
-        char op;
-        double num1,num2;
+        Console.WriteLine("Welcome, thank you for choosing Kevin Lee's calculator");
+        
+        bool userOperate = true;       
 
-        Console.WriteLine("Enter the Operator(+, -, *, /)");
-        Console.Readline()[0];
-
-        Console.WriteLine("Enter the two numbers one by one");
-        Console.WriteLine("Enter the first number");
-        num1 = Convert.ToDouble(Console.ReadLine());
-        Console.WriteLine("Enter the second number");
-        num2 = Convert.ToDouble(Console.ReadLine());
-
-        switch(op)
+        do 
         {
-            case '+':
-            Console.WriteLine("{0} + {1} = {2}", num1, num2, (num1 + num2));
-            break;
+            Console.WriteLine("Select the operator [1]Addition [2]Subtraction [3]Multiplcation [4]Division [0]To Exit"); 
 
-            case '-':
-            Console.WriteLine("{0} - {1} = {2}", num1, num2, (num1 - num2));
-            break;
+            char op;
+            op = Console.ReadLine()[0];   
+                    
+            Console.WriteLine("Enter the two numbers one by one");
+            Console.WriteLine("Enter the first number");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Enter the second number");
+            double num2 = Convert.ToDouble(Console.ReadLine());           
 
-            case '*':
-            Console.WriteLine("{0} * {1} = {2}", num1, num2, (num1 * num2));
-            break;
+            switch(op)
+            {
+                case '1':
+                    Console.WriteLine("{0} + {1} = {2}", num1, num2, (num1 + num2));
+                    break;
 
-            case '/':
-            if(num2 == 0.0)
-            Console.WriteLine("Denominator cannot divide by zero (0)!");
-            else
-            Console.WriteLine("{0} / {1} = {2}", num1, num2, (num1 / num2));
-            break;
-            
-            default:
-            Console.WriteLine("{0} is an invalid operator", op);
-            break;
-        }
+                case '2':
+                    Console.WriteLine("{0} - {1} = {2}", num1, num2, (num1 - num2));
+                    break;
 
-        Console.WriteLine("Press Any Key to Exit the Program");
-        Console.ReadKey();
-    }
+                case '3':
+                    Console.WriteLine("{0} * {1} = {2}", num1, num2, (num1 * num2));
+                    break;
+
+                case '4':
+                    if(num2 == 0.0)
+                    Console.WriteLine("Denominator cannot divide by zero (0)!");
+                    else
+                    Console.WriteLine("{0} / {1} = {2}", num1, num2, (num1 / num2));
+                    break;
+
+                 case '0':
+                    Environment.Exit(0);
+                    break;
+                            
+                default:
+                    Console.WriteLine("Invalid Input! Please type the correct input!", op);
+                    break;
+            }
+               
+           // Console.WriteLine("Do you wish you want to continue? Press [1] To continue or press any key to exit"); 
+
+        }while(userOperate == true);            
+    }  
 }
