@@ -49,55 +49,73 @@ namespace CalculatorLibrary
             
 
             // do the calculation in three phases ^ **, * / and + -
+            var computeStack = new Stack<double>();
             // phase 1, do expo 
             int i = 1;
             int counter = operatorQueue.Count;
             while ( i <= counter )
             {
+                if (computeStack.Count == 0) computeStack.Push(operandQueue.Dequeue());
                 char oper = operatorQueue.Dequeue();
                 if ( oper != '^' )
                 {
-                    operandQueue.Enqueue(operandQueue.Dequeue()); // get the first operand and put it in last
+                    operandQueue.Enqueue(computeStack.Pop()); // the computation job should not do in this round, put it back into queue
                     operatorQueue.Enqueue(oper);
-                    if (i == counter) operandQueue.Enqueue(operandQueue.Dequeue()); // get the first operand and put it in last
                 } else 
                 {
-                    double p1 = operandQueue.Dequeue();
+                    double p1 = computeStack.Pop();
                     double p2 = operandQueue.Dequeue();
-                    operandQueue.Enqueue(compute(oper, p1, p2));
+                    computeStack.Push(compute(oper, p1, p2));    //it need be put in computeStack.                    
                 }
                 i++;
             }
-            
+            if (computeStack.Count == 1) 
+            {
+                operandQueue.Enqueue(computeStack.Pop());    //
+            } else 
+            {
+                operandQueue.Enqueue(operandQueue.Dequeue());
+            }
             // phase 2, do * and / 
             i = 1;
             counter = operatorQueue.Count;
             while ( i <= counter )
             {
+                if (computeStack.Count == 0) computeStack.Push(operandQueue.Dequeue());
                 char oper = operatorQueue.Dequeue();
-                if ( oper != '*' || oper != '/' )
+                if ( oper == '*' || oper == '/')
                 {
-                    operandQueue.Enqueue(operandQueue.Dequeue()); // get the first operand and put it in last
-                    operatorQueue.Enqueue(oper);
-                    if (i == counter) operandQueue.Enqueue(operandQueue.Dequeue()); // get the first operand and put it in last
+                    double p1 = computeStack.Pop();
+                    double p2 = operandQueue.Dequeue();
+                    //Console.WriteLine($"DEBUG: {p1} {oper} {p2}");
+                    computeStack.Push(compute(oper, p1, p2));    //it need be put in computeStack.
+                    
                 } else 
                 {
-                    double p1 = operandQueue.Dequeue();
-                    double p2 = operandQueue.Dequeue();
-                    operandQueue.Enqueue(compute(oper, p1, p2));
+                    operandQueue.Enqueue(computeStack.Pop()); // the computation job should not do in this round, put it back into queue
+                    operatorQueue.Enqueue(oper);                    
                 }
                 i++;
+            }
+            if (computeStack.Count == 1) 
+            {
+                operandQueue.Enqueue(computeStack.Pop());    //
+            } else 
+            {
+                operandQueue.Enqueue(operandQueue.Dequeue());
             }
             
             // phase 3, do + and - 
             
             while ( operatorQueue.Count > 0 )
             {
-                    char oper = operatorQueue.Dequeue();
-                    double p1 = operandQueue.Dequeue();
-                    double p2 = operandQueue.Dequeue();
-                    operandQueue.Enqueue(compute(oper, p1, p2));
+                if (computeStack.Count == 0) computeStack.Push(operandQueue.Dequeue());
+                char oper = operatorQueue.Dequeue();      
+                double p1 = computeStack.Pop();
+                double p2 = operandQueue.Dequeue();
+                computeStack.Push(compute(oper, p1, p2));     
             }
+            if (computeStack.Count == 1) operandQueue.Enqueue(computeStack.Pop());
 
             return operandQueue.Dequeue();
         }
@@ -118,6 +136,7 @@ namespace CalculatorLibrary
                     break;
                 case '/':
                     tempResult /= p2;
+                    //Console.WriteLine($"DEBUG: {tempResult} {p2}");
                     break;
                 case '^':
                     tempResult = Math.Pow(p1, p2);
@@ -141,9 +160,10 @@ namespace CalculatorLibrary
                 {
                     if ( s[pos] == ')' ) parenthesesCtr--;
                     if ( s[pos] == '(' ) parenthesesCtr++;
-                    pos++;
+                    
                     if ( pos > endPos )
-                        throw new FormatException($"Parentheses must be in pair. ErrorFormat in {s} at {pos}.");
+                        throw new FormatException($"Parentheses must be in pair. ErrorFormat in {s} at {pos} with {parenthesesCtr}.");
+                    pos++;
                 }
                 return (pos, Calculate(s.Substring(1, pos-2)));
             } 
@@ -162,6 +182,7 @@ namespace CalculatorLibrary
                     } 
                     pos++;
                 }
+
                 return (pos, double.Parse(s.Substring(0, pos)));
             }
             
