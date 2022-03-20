@@ -1,10 +1,12 @@
 ﻿using System;
-using System.Web;
+
 
 namespace practice
 {
-    class inputInt
+    class InputInt
     {
+   
+    
          static void Main(string[] args)
         
         {
@@ -19,7 +21,7 @@ namespace practice
              int h = N - n;
 
              Console.WriteLine(" Please choose your operations number");
-             Console.WriteLine("   1 -> Addision\n   2 -> Sunstraction\n   3 -> multpilication \n   4 -> Division");
+             Console.WriteLine("   1 -> Addision\n   2 -> Substraction\n   3 -> multpilication \n   4 -> Division");
             int input = Int32.Parse(Console.ReadLine());
 
              if (input == 1)
