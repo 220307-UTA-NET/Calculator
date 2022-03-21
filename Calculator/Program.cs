@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 
 namespace FunCalculator
 {
@@ -12,7 +13,9 @@ namespace FunCalculator
             int calcMode;
             string incomingFilename;
             string baseFilename;
-            IDictionary<string, int> wordsNumbers = new Dictionary<string,int>();
+            string fullFilename;
+            int useCase;
+            /*public static Dictionary<string, int> wordsNumbers = new Dictionary<string,int>();
             wordsNumbers.Add("one",1);
             wordsNumbers.Add("two",2);
             wordsNumbers.Add("three",3);
@@ -40,7 +43,8 @@ namespace FunCalculator
             wordsNumbers.Add("seventy",70);
             wordsNumbers.Add("eighty",80);
             wordsNumbers.Add("ninety",90);
-            wordsNumbers.Add("one hundred",100);
+            wordsNumbers.Add("hundred",100);
+            /*wordsNumbers.Add("one hundred",100);
             wordsNumbers.Add("two hundred",200);
             wordsNumbers.Add("three hundred",300);
             wordsNumbers.Add("four hundred",400);
@@ -49,10 +53,8 @@ namespace FunCalculator
             wordsNumbers.Add("seven hundred",700);
             wordsNumbers.Add("eight hundred",800);
             wordsNumbers.Add("nine hundred",900);
-            wordsNumbers.Add("one thousand",1000);
-
-
-
+            wordsNumbers.Add("one thousand",1000);*/
+            
 
             //int[] menuNums = { 1, 2, 3, 4};
 
@@ -70,6 +72,7 @@ namespace FunCalculator
             Console.WriteLine("0.) I came here by mistake, please close this program.");
             optionVarAttempt = Console.ReadLine();
             
+                        
             try
             {
                 optionVar = int.Parse(optionVarAttempt);
@@ -111,7 +114,20 @@ namespace FunCalculator
                 }
             
             
-            switch ( optionVar )
+            if ((optionVar > 0) && (optionVar < 5))
+            {
+                useCase = 1;
+            }
+            else if (optionVar == 5)
+            {
+                useCase = 2;
+            }
+            else
+            {
+                useCase = 0;
+            }
+
+            switch ( useCase )
             {
                 case 0:
                 return;
@@ -120,24 +136,35 @@ namespace FunCalculator
                 //Console.Clear();
                 Console.WriteLine("Alright then, what equation would you like the solution to?");
                 mathPhrase = Console.ReadLine();
-                /*inputShredder();
-                abacus();*/
+                DataTable mt = new DataTable();
+                var tempOutput = mt.Compute(mathPhrase,"");
+                //Console.WriteLine(( ( 9 + 3 * 5 ) - 10 ));
+                //inputShredder(mathPhrase);
+                //abacus();
+                Console.WriteLine("The solution: " + mathPhrase + " = " + tempOutput + ".");
                 break;
 
                 case 2:
                 //Console.Clear();
-                Console.WriteLine("Alright then, what equation would you like the solution to?");
-                mathPhrase = Console.ReadLine();
-                /*inputShredder();
-                abacus();*/
-                break;
+                Console.WriteLine("What .txt file would you like evaluated by the calculator?");
+                incomingFilename = Console.ReadLine();
+                //fullFilename = fileFunnel(incomingFilename);
 
-                case 3:
+                /*inputShredder();
+                abacus();
+                fileMaker();
+                Console.WriteLine("Your solutions can be found in the file named: " + baseFilename + "-solved.txt. Thank you for using the calculator.");*/
+                break;
+                
+                
+                
+
+                /*case 3:
                 //Console.Clear();
                 Console.WriteLine("Alright then, what equation would you like the solution to?");
-                mathPhrase = Console.ReadLine();
-                /*inputShredder();
-                abacus();*/
+                //mathPhrase = Console.ReadLine();
+                inputShredder();
+                abacus();
                 break;
 
                 case 4:
@@ -145,7 +172,7 @@ namespace FunCalculator
                 Console.WriteLine("Alright then, what equation would you like the solution to?");
                 mathPhrase = Console.ReadLine();
                 /*inputShredder();
-                abacus();*/
+                abacus();
                 break;
              
                 case 5:
@@ -156,22 +183,37 @@ namespace FunCalculator
                 abacus();
                 fileMaker();*/
 
-                baseFilename = incomingFilename.Substring( 0 , incomingFilename.Length - 4 );
-                Console.WriteLine("Your solutions can be found in the file named: " + baseFilename + "-solved.txt. Thank you for using the calculator.");
-                break;
+                
+                
 
             }
         }
-        static void inputShredder()
+        
+        static void inputShredder(string textThatMightHaveWords)
         {
             //mathPhrase
+
+            textThatMightHaveWords.Replace("plus","+");
+            textThatMightHaveWords.Replace("minus","-");
+            textThatMightHaveWords.Replace("times","*");
+            textThatMightHaveWords.Replace("multiplied by","*");
+            textThatMightHaveWords.Replace("divided by","/");
+            Console.WriteLine(textThatMightHaveWords);
         }
 
-        static void fileFunnel()
+        /*static void fileFunnel()
         {                
-                
+            if (textThatShouldBeFilename.Substring(textThatShouldBeFilename.Length - 4) == ".txt")
+            {
+                baseFilename = incomingFilename.Substring( 0 , incomingFilename.Length - 4 );
+            }
+            else
+            {
+                    baseFilename = incomingFilename;
+            }   
+            return baseFilename;
 
-        }
+        }*/
 
         static void abacus()
         {                
