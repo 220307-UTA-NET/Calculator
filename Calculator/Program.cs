@@ -7,6 +7,7 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
+            //Calculator consists with only the basic operations!
             Console.WriteLine("This is your Calculator!");
 
             while ( true )
@@ -18,28 +19,30 @@ namespace Calculator
                 Console.WriteLine("[1] - Addition");
                 Console.WriteLine("[0] - Exit");
 
-                int choices = int.Parse(Console.ReadLine());
-                switch( choices )
+                int options = int.Parse(Console.ReadLine());
+                
+                //creates cases for each operation
+                switch( options )
                 {
-                    case 0:
+                    case 0: //exit
                         Console.WriteLine("Press Enter to Continue");
                         Console.ReadLine();
                         Console.Clear();
                         return;
                     
-                    case 1:
+                    case 1: //Addition operation 
                         Addition();
                         break;
 
-                    case 2:
+                    case 2: //Subtraction operation
                         Subtraction();
                         break;
 
-                    case 3:
+                    case 3: //Multiplication operation
                         Multiplication();
                         break;
 
-                    case 4:
+                    case 4: //Division operation
                         Division();
                         break;
 
@@ -52,7 +55,7 @@ namespace Calculator
             }
         }
 
-        static async void Addition()
+        static void Addition()
         {
             double number1, number2;
             double Result;
@@ -60,10 +63,16 @@ namespace Calculator
             while ( true )
             {
                 Console.WriteLine("Enter the numbers you want to calculate.");
+                
+                //Inputs the first number 
                 Console.WriteLine("Input the first number: ");
+                //Allows the number you input to be a decimal number
                 number1 = Convert.ToDouble(Console.ReadLine());
+                //Inputs the second number
                 Console.WriteLine("Input the second number: ");
                 number2 = Convert.ToDouble(Console.ReadLine());
+
+                //Outputs the result of the sum
                 Result = number1 + number2; 
                 Console.WriteLine("The result of the sum is: " + Result);
                 Console.WriteLine("Press Enter to continue.");
@@ -90,7 +99,7 @@ namespace Calculator
 
                 Result = number1 - number2;
                 
-
+                //Outputs the difference of the two inputs
                 Console.WriteLine("The result of the difference is: " + Math.Round(Result, 3));
 
                 Console.WriteLine("Press Enter to continue.");
@@ -116,6 +125,7 @@ namespace Calculator
 
                 Result = number1 * number2;
 
+                //Outputs the produce of the two inputs
                 Console.WriteLine("The result of the product is: " + Math.Round(Result, 3));
 
                 Console.WriteLine("Press Enter to continue.");
@@ -140,6 +150,7 @@ namespace Calculator
 
                 Result = number1 / number2;
 
+                //Outputs the quotient of the two inputs
                 Console.WriteLine("The result of the quotient is: " + Math.Round(Result, 3));
 
                 Console.WriteLine("Press Enter to continue.");
