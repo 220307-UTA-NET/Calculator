@@ -1,12 +1,17 @@
-﻿namespace Calculator 
+﻿using System;
+using System.IO;
+
+namespace Calculator 
 {
-            static class calculator
+            class calculator
             {
 
                     static void Main(string[] args)
-                    { 
+                    {   calculator operations = new calculator();
+                        
                         while (true)
                                     {
+                                    Console.Clear();
                                     Console.WriteLine("Hello, what operation you need to do?");
                                     string  OPTIONS= 
 
@@ -15,14 +20,118 @@
                                                             [1] DIVIDE
                                                             [2] ADD
                                                             [3] SUBSTRACT 
-                                                            [4] MULTIPLE OPERATIONS 
+                                                           
                                                         " ;
                                     Console.WriteLine(OPTIONS);
                                     float MENU = float.Parse(Console.ReadLine());
                                     switch (MENU)            
                                                 { 
                                                     case 0:
-                                                        while (true)
+                                                        operations.multiply();
+                                                    break;         
+                                                    
+                                                    case 1:
+                                                        operations.division();
+                                                    break;
+                                        
+                                                    case 2:
+                                                        operations.add();
+                                                    break; 
+
+                                                    case 3:
+                                                         operations.subtract();
+                                                    break;        
+                                                }
+                                    Console.WriteLine("Do you still need to do another operation [y/n]?"); 
+                                    char ans2= char.Parse(Console.ReadLine()); 
+                                    if (ans2.Equals ('n') ){break;}
+                                    else if ( ans2.Equals ('y') ){continue;}
+                                    else {Console.WriteLine("write a correct character");}
+                                    }
+ 
+                    }
+
+
+                  public void  division ()
+                    {
+                                
+                                 while (true)
+                                                                    {   
+                                                                                                                                 Console.WriteLine("Please type the numbers that you need to divide");
+                                                                        string  divisionFormat = 
+                                    
+                                                                                            @"
+                                                                                                        number 1
+                                                                                                Result = -----------
+                                                                                                        number 2
+
+                                                                                            ";
+                                                                        
+                                                                        Console.WriteLine(divisionFormat);
+                                                                        
+                                                                        // string date = time.ToString("d"); 
+                                                                        string path = @"./calculationhistory.txt";
+                                                                        float a , b;
+                                                                        
+                                                                               
+                                                                        Console.WriteLine("type number 1 ");
+                                                                        try
+                                                                        { 
+                                                                          a = float.Parse(Console.ReadLine());
+                                                                        }
+                                                                        catch (Exception e ) 
+                                                                        {
+                                                                          Console.WriteLine("Bad input, I accept only numbers. Please type a again");
+                                                                          continue;
+                                                                        
+                                                                        }
+                                                                        
+                                                                        
+                                                                        Console.WriteLine("type number 2");
+                                                                        
+                                                                        try
+                                                                        { 
+                                                                          b = float.Parse(Console.ReadLine());
+                                                                        }
+                                                                        catch (Exception e ) 
+                                                                        {
+                                                                          Console.WriteLine("Bad input, I accept only numbers. Please type a again");
+                                                                          continue;
+                                                                        
+                                                                        }
+                                                                       float division = a / b ;
+                                                                       string g1 = a + " / " + b + "  =  " + division;
+                                                                       Console.WriteLine(g1); 
+
+                                                                        Console.WriteLine("Do you still need to do another division [y/n]?"); 
+                                                                        char ans1= char.Parse(Console.ReadLine()); 
+                                                                        if (ans1.Equals ('n') ){    DateTime time = DateTime.Now;
+                                                                                                    if (!File.Exists(path))
+                                                                                                                        {
+
+                                                                                                                            using(StreamWriter fe = File.CreateText(path))
+                                                                                                                                                                        {fe.WriteLine("this is just a test ");}
+                                                                                                                        }
+                                                                                                                        else 
+                                                                                                                        {   
+                                                                                                                            
+                                                                                                                            using(StreamWriter fe = File.AppendText(path))
+                                                                                                                                                                        {
+                                                                                                                                                                        fe.WriteLine($"{time}     {a} / {b} = {division} ");
+                                                                                                                                                                        }
+                                                                                                                        }   
+                                                                            
+                                                                            
+                                                                            
+                                                                                                break;}
+                                                                        else if ( ans1.Equals ('y') ){continue;}
+                                                                        else {Console.WriteLine("write a correct character");}
+                                                                    }
+
+                    }
+                  public void multiply ()
+                    {
+                         while (true)
                                                                     {   Console.WriteLine("From 2 to 5, how many number you need to multiply ?");
                                                                         float input = float.Parse(Console.ReadLine());
                                                                         float a,b,c,d,e;
@@ -130,62 +239,11 @@
                                                                         if (ans1.Equals ('n') ){break;}
                                                                         else if ( ans1.Equals ('y') ){continue;}
                                                                         else {Console.WriteLine("write a correct character");}
-                                                                    }
-                                                    break;         
-                                                    
-                                                    case 1:
-                                                        while (true)
-                                                                    {   float a,b;
-                                                                        Console.WriteLine("Please type the numbers that you need to divide");
-                                                                        string  divisionFormat = 
-                                    
-                                                                                            @"
-                                                                                                        number 1
-                                                                                                Result = -----------
-                                                                                                        number 2
-
-                                                                                            ";
-                                                                        
-                                                                        Console.WriteLine(divisionFormat);
-                                                                        Console.WriteLine("type number 1 ");
-                                                                        try
-                                                                        {
-                                                                          a = float.Parse(Console.ReadLine());
-                                                                        }
-                                                                        catch (Exception e ) 
-                                                                        {
-                                                                          Console.WriteLine("Bad input, I accept only numbers. Please type a again");
-                                                                          continue;
-                                                                        
-                                                                        }
-                                                                        
-                                                                        
-                                                                        Console.WriteLine("type number 2");
-                                                                        
-                                                                        try
-                                                                        {
-                                                                          b = float.Parse(Console.ReadLine());
-                                                                        }
-                                                                        catch (Exception e ) 
-                                                                        {
-                                                                          Console.WriteLine("Bad input, I accept only numbers. Please type a again");
-                                                                          continue;
-                                                                        
-                                                                        }
-                                                                        float division = a/b;   
-                                                                        Console.WriteLine(a + " / " + b + "  =  " + division);
-
-                                                                        Console.WriteLine("Do you still need to do another division [y/n]?"); 
-                                                                        char ans1= char.Parse(Console.ReadLine()); 
-                                                                        if (ans1.Equals ('n') ){break;}
-                                                                        else if ( ans1.Equals ('y') ){continue;}
-                                                                        else {Console.WriteLine("write a correct character");}
-                                                                    }
-                                                    break;
-
-                                                    case 2:
-                                                     
-                                                        while (true)
+                                                                    }      
+                    }
+                  public void add ()
+                    {
+                         while (true)
                                                                     {   Console.WriteLine("From 2 to 5, how many numbers do you need to add ?");
                                                                         float input = float.Parse(Console.ReadLine());
                                                                         float a,b,c,d,e;
@@ -290,10 +348,10 @@
                                                                         else if ( ans1.Equals ('y') ){continue;}
                                                                         else {Console.WriteLine("write a correct character");}
                                                                     }
-                                                    break; 
-
-                                                    case 3:
-                                                        while (true)
+                    }
+                  public void subtract ()
+                    {
+                       while (true)
                                                                     {   
                                                                         float a,b,c,d,e;
                                                                         try
@@ -319,26 +377,8 @@
                                                                         else if ( ans1.Equals ('y') ){continue;}
                                                                         else {Console.WriteLine("write a correct character");}
                                                                     }
-
-                                                    
-                                                    
-                                                    break;        
-                                                }
-                                    Console.WriteLine("Do you still need to do another operation [y/n]?"); 
-                                    char ans2= char.Parse(Console.ReadLine()); 
-                                    if (ans2.Equals ('n') ){break;}
-                                    else if ( ans2.Equals ('y') ){continue;}
-                                    else {Console.WriteLine("write a correct character");}
-                                    }
-                                    
-
-
-
-
-
-
+ 
                     }
-
 
             
             
