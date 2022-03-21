@@ -9,7 +9,7 @@ namespace Project_1_Calculator
              static void Main(string[] args)
          
         {
-          
+          while(true){
              try{
             Console.WriteLine("Enter your number");
             Console.WriteLine("----------");
@@ -63,7 +63,7 @@ namespace Project_1_Calculator
                
                     Console.WriteLine(e.Message);
                }
-
+          }
              }
              //Console.WriteLine("Enter to continue");
 
