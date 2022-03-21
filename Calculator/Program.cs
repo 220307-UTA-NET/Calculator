@@ -69,7 +69,7 @@ namespace Calculator
                                                                         
                                                                         Console.WriteLine(divisionFormat);
                                                                         
-                                                                        // string date = time.ToString("d"); 
+                                                                        // string date = time2.ToString("d"); 
                                                                         string path = @"./calculationhistory.txt";
                                                                         float a , b;
                                                                         
@@ -105,7 +105,7 @@ namespace Calculator
 
                                                                         Console.WriteLine("Do you still need to do another division [y/n]?"); 
                                                                         char ans1= char.Parse(Console.ReadLine()); 
-                                                                        if (ans1.Equals ('n') ){    DateTime time = DateTime.Now;
+                                                                        if (ans1.Equals ('n') ){    DateTime time2 = DateTime.Now;
                                                                                                     if (!File.Exists(path))
                                                                                                                         {
 
@@ -117,7 +117,7 @@ namespace Calculator
                                                                                                                             
                                                                                                                             using(StreamWriter fe = File.AppendText(path))
                                                                                                                                                                         {
-                                                                                                                                                                        fe.WriteLine($"{time}     {a} / {b} = {division} ");
+                                                                                                                                                                        fe.WriteLine($"{time2}     {a} / {b} = {division} ");
                                                                                                                                                                         }
                                                                                                                         }   
                                                                             
@@ -134,10 +134,12 @@ namespace Calculator
                          while (true)
                                                                     {   Console.WriteLine("From 2 to 5, how many number you need to multiply ?");
                                                                         float input = float.Parse(Console.ReadLine());
+                                                                        string path = @"./calculationhistory.txt";
                                                                         float a,b,c,d,e;
                                                                         switch (input)
                                                                         {
                                                                                 case 2:
+                                                                                DateTime time2 = DateTime.Now;
                                                                                  try
                                                                                 {
                                                                             
@@ -155,7 +157,22 @@ namespace Calculator
                                                                                 
                                                                                 float mutiplication1 = a*b;
                                                                                 Console.WriteLine(a + " * " + b + "  =  " + mutiplication1);
+                                                                                
+                                                                                if (!File.Exists(path))
+                                                                                                                        {   
 
+                                                                                                                            using(StreamWriter fe = File.CreateText(path))
+                                                                                                                                                                        {fe.WriteLine($"{time2}     {a} * {b} = {mutiplication1} ");}
+                                                                                                                        }
+                                                                                                                        else 
+                                                                                                                        {   
+                                                                                                                            
+                                                                                                                            using(StreamWriter fe = File.AppendText(path))
+                                                                                                                                                                        {
+                                                                                                                                                                        fe.WriteLine($"{time2}     {a} * {b} = {mutiplication1} ");
+                                                                                                                                                                        }
+                                                                                                                        }   
+                                                                                
                                                                                 break;
                                                                                 case 3:
                                                                                  try
@@ -177,6 +194,21 @@ namespace Calculator
                                                                                 
                                                                                 float mutiplication2 = a*b*c;
                                                                                 Console.WriteLine(a + "  *  " + b + "  *  " + c + "  =  " + mutiplication2);
+                                                                                DateTime time3 = DateTime.Now;
+                                                                                if (!File.Exists(path))
+                                                                                                                        {   
+
+                                                                                                                            using(StreamWriter fe = File.CreateText(path))
+                                                                                                                                                                        {fe.WriteLine($"{time3}     {a} * {b} * {c} = {mutiplication2} ");}
+                                                                                                                        }
+                                                                                                                        else 
+                                                                                                                        {   
+                                                                                                                            
+                                                                                                                            using(StreamWriter fe = File.AppendText(path))
+                                                                                                                                                                        {
+                                                                                                                                                                        fe.WriteLine($"{time3}     {a} * {b}*{c} = {mutiplication2} ");
+                                                                                                                                                                        }
+                                                                                                                        }   
                                                                                 break;
                                                                                 case 4:
                                                                                  try
@@ -200,6 +232,21 @@ namespace Calculator
                                                                                 
                                                                                 float mutiplication4 = a*b*c*d;
                                                                                 Console.WriteLine(a + "  *  " + b + "  *  " + c + "  *  " + d + "  =  " + mutiplication4);
+                                                                                DateTime time4 = DateTime.Now;
+                                                                                if (!File.Exists(path))
+                                                                                                                        {   
+
+                                                                                                                            using(StreamWriter fe = File.CreateText(path))
+                                                                                                                                                                        {fe.WriteLine($"{time4}     {a} * {b} * {c}*{d} = {mutiplication4} ");}
+                                                                                                                        }
+                                                                                                                        else 
+                                                                                                                        {   
+                                                                                                                            
+                                                                                                                            using(StreamWriter fe = File.AppendText(path))
+                                                                                                                                                                        {
+                                                                                                                                                                        fe.WriteLine($"{time4}     {a} * {b}* {c}*{d} = {mutiplication4} ");
+                                                                                                                                                                        }
+                                                                                                                        } 
                                                                                 break;
                                                                                 case 5:
                                                                                  try
@@ -225,6 +272,21 @@ namespace Calculator
                                                                                 
                                                                                 float mutiplication5 = a*b*c*d*e;
                                                                                 Console.WriteLine(a + "  *  " + b + "  *  " + c + "   *  " + d + "  *  " + e +"  =  " + mutiplication5);
+                                                                                 DateTime time5 = DateTime.Now;
+                                                                                if (!File.Exists(path))
+                                                                                                                        {   
+
+                                                                                                                            using(StreamWriter fe = File.CreateText(path))
+                                                                                                                                                                        {fe.WriteLine($"{time5}     {a} * {b} * {c}*{d}*{e} = {mutiplication5} ");}
+                                                                                                                        }
+                                                                                                                        else 
+                                                                                                                        {   
+                                                                                                                            
+                                                                                                                            using(StreamWriter fe = File.AppendText(path))
+                                                                                                                                                                        {
+                                                                                                                                                                        fe.WriteLine($"{time5}     {a} * {b}* {c} *{d}*{e}= {mutiplication5} ");
+                                                                                                                                                                        }
+                                                                                                                        } 
                                                                                 break;
                                                                                 default:
                                                                                 Console.WriteLine("you didn't select a proper option, please try again.");
@@ -247,9 +309,11 @@ namespace Calculator
                                                                     {   Console.WriteLine("From 2 to 5, how many numbers do you need to add ?");
                                                                         float input = float.Parse(Console.ReadLine());
                                                                         float a,b,c,d,e;
+                                                                        string path = @"./calculationhistory.txt";
                                                                         switch (input)
-                                                                        {
+                                                                        {       
                                                                                 case 2:
+                                                                                
                                                                                 try
                                                                                 {
                                                                                 Console.WriteLine("type number 1");
@@ -265,6 +329,21 @@ namespace Calculator
                                                                                 }
                                                                                 float subtract = a + b;
                                                                                 Console.WriteLine(a + " + " + b + "  =  " + subtract);
+                                                                                DateTime time = DateTime.Now;
+                                                                                if (!File.Exists(path))
+                                                                                                                        {   
+
+                                                                                                                            using(StreamWriter fe = File.CreateText(path))
+                                                                                                                                                                        {fe.WriteLine($"{time}     {a} + {b} = {subtract} ");}
+                                                                                                                        }
+                                                                                                                        else 
+                                                                                                                        {   
+                                                                                                                            
+                                                                                                                            using(StreamWriter fe = File.AppendText(path))
+                                                                                                                                                                        {
+                                                                                                                                                                        fe.WriteLine($"{time}     {a} + {b} = {subtract} ");
+                                                                                                                                                                        }
+                                                                                                                        }   
 
                                                                                 break;
                                                                                 case 3:
@@ -285,6 +364,21 @@ namespace Calculator
                                                                                 }
                                                                                 subtract = a + b + c ;
                                                                                 Console.WriteLine(a + "  +  " + b + "  +  " + c + "  =  " + subtract);
+                                                                                DateTime time2 = DateTime.Now;
+                                                                                if (!File.Exists(path))
+                                                                                                                        {   
+
+                                                                                                                            using(StreamWriter fe = File.CreateText(path))
+                                                                                                                                                                        {fe.WriteLine($"{time2}     {a} + {b}+{c} = {subtract} ");}
+                                                                                                                        }
+                                                                                                                        else 
+                                                                                                                        {   
+                                                                                                                            
+                                                                                                                            using(StreamWriter fe = File.AppendText(path))
+                                                                                                                                                                        {
+                                                                                                                                                                        fe.WriteLine($"{time2}     {a} + {b}+{c} = {subtract} ");
+                                                                                                                                                                        }
+                                                                                                                        }   
                                                                                 break;
                                                                                 case 4:
                                                                                 try
@@ -305,8 +399,24 @@ namespace Calculator
                                                                                 
                                                                                 }
                                                                                 
-                                                                             subtract = a+b+c+d;
+                                                                                subtract = a+b+c+d;
                                                                                 Console.WriteLine(a + "  +  " + b + "  +  " + c + "  +  " + d + "  =  " + subtract);
+                                                                                 DateTime time3 = DateTime.Now;
+                                                                                if (!File.Exists(path))
+                                                                                                                        {   
+
+                                                                                                                            using(StreamWriter fe = File.CreateText(path))
+                                                                                                                                                                        {fe.WriteLine($"{time3}     {a} + {b} + {c}+ {d}= {subtract} ");}
+                                                                                                                        }
+                                                                                                                        else 
+                                                                                                                        {   
+                                                                                                                            
+                                                                                                                            using(StreamWriter fe = File.AppendText(path))
+                                                                                                                                                                        {
+                                                                                                                                                                        fe.WriteLine($"{time3}     {a} + {b} + {c}+{d} = {subtract} ");
+                                                                                                                                                                        }
+                                                                                                                        }   
+
                                                                                 break;
                                                                                 case 5:
                                                                                 
@@ -333,6 +443,22 @@ namespace Calculator
                                                                                 
                                                                              subtract = a+b+c+d+e;
                                                                                 Console.WriteLine(a + "  +  " + b + "  +  " + c + "   +  " + d + "  +  " + e +"  =  " + subtract);
+                                                                                DateTime time4 = DateTime.Now;
+                                                                                if (!File.Exists(path))
+                                                                                                                        {   
+
+                                                                                                                            using(StreamWriter fe = File.CreateText(path))
+                                                                                                                                                                        {fe.WriteLine($"{time4}     {a} + {b} + {c}+ {d}+{e}= {subtract} ");}
+                                                                                                                        }
+                                                                                                                        else 
+                                                                                                                        {   
+                                                                                                                            
+                                                                                                                            using(StreamWriter fe = File.AppendText(path))
+                                                                                                                                                                        {
+                                                                                                                                                                        fe.WriteLine($"{time4}     {a} + {b} + {c}+{d}+{e} = {subtract} ");
+                                                                                                                                                                        }
+                                                                                                                        }   
+
                                                                                 break;
                                                                                 default:
                                                                                 Console.WriteLine("you didn't select a proper option, please try again.");
@@ -353,7 +479,8 @@ namespace Calculator
                     {
                        while (true)
                                                                     {   
-                                                                        float a,b,c,d,e;
+                                                                       string path = @"./calculationhistory.txt";
+                                                                       float a,b;
                                                                         try
                                                                         {
                                                                          
@@ -362,14 +489,31 @@ namespace Calculator
                                                                         a= float.Parse(Console.ReadLine());
                                                                         Console.WriteLine("type number 2");
                                                                         b= float.Parse(Console.ReadLine());
+                                                                        
+                                                                        
                                                                         }
                                                                         catch (Exception e2 ) 
                                                                         {
                                                                         Console.WriteLine("Bad input, I accept only numbers. Please type a again");
                                                                         continue;
                                                                         
-                                                                        }                                                                
+                                                                        }    
+                                                                        DateTime time = DateTime.Now;
                                                                         float subtract  = a - b;
+                                                                        if (!File.Exists(path))
+                                                                                                                        {   
+
+                                                                                                                            using(StreamWriter fe = File.CreateText(path))
+                                                                                                                                                                        {fe.WriteLine($"{time}   {a} - {b} = {subtract} ");}
+                                                                                                                        }
+                                                                                                                        else 
+                                                                                                                        {   
+                                                                                                                            
+                                                                                                                            using(StreamWriter fe = File.AppendText(path))
+                                                                                                                                                                        {
+                                                                                                                                                                        fe.WriteLine($"{time}     {a} - {b}  = {subtract} ");
+                                                                                                                                                                        }
+                                                                                                                        }   
                                                                         Console.WriteLine(a + " - " + b + "  =  " + subtract);
                                                                         Console.WriteLine("Do you still need to do another multiplication [y/n]?"); 
                                                                         char ans1= char.Parse(Console.ReadLine()); 
