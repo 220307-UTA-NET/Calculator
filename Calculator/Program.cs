@@ -6,113 +6,36 @@ namespace Calculator
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Welcome to the calculator!");
+            Console.WriteLine("Welcome to the Dan's Calculator!");
             
             while (true)
             {
                 Console.WriteLine("[1] - Input Equation Line");
                 Console.WriteLine("[0] - Exit");
 
+                
                 int menu = int.Parse(Console.ReadLine());
+                
+                switch(menu)
                 {
-                    switch(menu)
-                    {
-                        case 1:
-                            Console.Clear();
-                            Console.WriteLine("Enter your equation. \nPlease only use 0-9 as values and + - / * as operands.");
-                            string? input = Console.ReadLine();
-                            InputFullEquation(input);
-                            Console.WriteLine("Press enter to return to the menu");
-                            Console.ReadLine();
-                            Console.Clear();
-                            break;
-                        case 0:
-                            Console.Clear();
-                            Console.WriteLine("Goodbye!");
-                            return;
-                    }
+                    case 1:
+                        Console.Clear();
+                        Console.WriteLine("Enter your equation. \nPlease only use 0-9 as values and + - / * as operands.");
+                        string? input = Console.ReadLine();
+                        InputFullEquation(input);
+                        Console.WriteLine("Press enter to return to the menu");
+                        Console.ReadLine();
+                        Console.Clear();
+                        break;
+                    case 0:
+                        Console.Clear();
+                        Console.WriteLine("Goodbye!");
+                        return;
                 }
+                
             }
 
-            // while (true)
-            // {
-            //     Console.WriteLine("Select one of the listed funtions");
-            //     Console.WriteLine("[1] - Add numbers");
-            //     Console.WriteLine("[2] - Subtract numbers");
-            //     Console.WriteLine("[3] - Divide numbers");
-            //     Console.WriteLine("[4] - Multiply numbers");
-            //     Console.WriteLine("[5] - Multiple Operations");
-            //     Console.WriteLine("[6} - Input Equation Line");
-            //     Console.WriteLine("[0] - Exit");
 
-            //     int menu = int.Parse(Console.ReadLine());
-                    
-            //     switch(menu)
-            //     {
-            //         case 0:
-            //             Console.Clear();
-            //             Console.WriteLine("Goodbye!");
-            //             return;
-            //         case 1:
-            //             AddInput();
-            //             Console.WriteLine("Press enter to continue");
-            //             Console.ReadLine();
-            //             Console.Clear();
-            //             break;
-            //         case 2:
-            //             SubtractInput();
-            //             Console.WriteLine("Press enter to continue");
-            //             Console.ReadLine();
-            //             Console.Clear();
-            //             break;
-            //         case 3:
-            //             DivideInput();
-            //             Console.WriteLine("Press enter to continue");
-            //             Console.ReadLine();
-            //             Console.Clear();
-            //             break;
-            //         case 4:
-            //             MultiplyInput();
-            //             Console.WriteLine("Press enter to continue");
-            //             Console.ReadLine();
-            //             Console.Clear();
-            //             break;
-            //         case 5:
-            //             Console.Clear();
-            //             Console.WriteLine("Enter the first number to operate on");
-            //             if (!Double.TryParse(Console.ReadLine(), out decimal first))
-            //             {
-            //                 Console.Write("Error not a valid input\n");
-            //                 break;
-            //             }
-            //             first=(MultipleOperation(first));
-            //             while (true)
-                        
-            //             {                           
-            //                 Console.WriteLine("Type \"DONE\" to finish. \nPress Enter to perform another operation on your solution.");
-                                            
-            //                 if (Console.ReadLine().ToUpper() == "DONE" )
-            //                 {
-            //                     break; 
-            //                 }
-            //                 else
-            //                 {
-            //                     first=(MultipleOperation(first));
-            //                 }   
-            //             }
-            //             Console.Clear();
-            //             break;
-            //         case 6:
-            //             Console.WriteLine("Enter your equation. \nPlease only use 0-9 as values and + - / * as operands.");
-            //             string? input = Console.ReadLine();
-            //             InputFullEquation(input);
-            //             //Console.WriteLine("Here's you answer. Remove your solution or operate further on it");
-            //             Console.WriteLine("Press enter to return to the menu");
-            //             Console.ReadLine();
-            //             Console.Clear();
-            //             break;
-            //     }
-            // }
         }
         
  
@@ -208,16 +131,7 @@ namespace Calculator
 
             }
 
-            static void DivideInput()
-            {
-                Console.WriteLine("In Progess, come back later.");
-            }
-
-            static void MultiplyInput()
-            {
-                Console.WriteLine("In Progess, come back later.");
-            }
-
+    
             static decimal MultipleOperation(decimal first)
             {
                 decimal[] numbers=new decimal[2];
@@ -284,8 +198,6 @@ namespace Calculator
             //remover any potential whitespaces
             string strippedInput = String.Concat(input.Where(c => !Char.IsWhiteSpace(c)));
 
-             // List of entire string as chars
-            List<char> inputList = input.ToList();
             
             //Check for invalid inputs
             for (int i =0; i<strippedInput.Length; i++)
@@ -304,49 +216,63 @@ namespace Calculator
             bool divideByZero = strippedInput.Contains("/0");
             if (divideByZero)
             {
-            Console.WriteLine("Cannot divide by zero, result will be infinite");
-            return;
+                Console.WriteLine("Cannot divide by zero, result will be infinite");
+                return;
             }
             
-            //Parse out values separated by operands
-            //Convert to a list of decimals
+            //Parse out values separated by operators
             List<string> listValues = new List<string>();
             listValues = strippedInput.Split('+','-','/','*').ToList(); 
-            List<decimal> listValuesDec = listValues.ConvertAll<decimal>(Convert.ToDecimal);
+            listValues.RemoveAll(item => item == ""); //remove empty items in list due to +-, --, *-, /-
+            List<decimal> listValuesDec = listValues.ConvertAll<decimal>(Convert.ToDecimal); //convert to decimal
 
+            //make first number negative if there's a negative to start the string
+            if (strippedInput.Substring(0,1)=="-")
+            {
+                 listValuesDec[0]=-(listValuesDec[0]);
+            }
 
+            List<char> inputList = strippedInput.ToList();
             
-            List<char> operandsList = new List<char>(); //new List to populate with operands
-
-            for (int i=0; i<inputList.Count; i++)
+            //new List to populate with operators
+            List<char> operatorsList = new List<char>(); 
+            
+            //Populate list with operators, make numbers negative if need be
+            for (int i=1, valueIndex=1; i<inputList.Count; i++)
             {
                 if (inputList[i] == '+'||inputList[i] == '-'||inputList[i] == '/'||inputList[i] == '*')
                 {
-                    operandsList.Add(inputList[i]);
+                    operatorsList.Add(inputList[i]);
+                    if (inputList[i+1] == '-')
+                    {
+                        listValuesDec[valueIndex]=-(listValuesDec[valueIndex]);
+                        i++;
+                    }
+                    valueIndex++;
                 }   
             }
             
 
             //Iterate through operands and evalute * and /
-            int operandsLeft = operandsList.Count;
-            for(int j=0; j<operandsLeft; j++)
+            int operatorsLeft = operatorsList.Count;
+            for(int j=0; j<operatorsLeft; j++)
             {
                 while (true)
                 {
-                    for (int i=0, c=1; i<operandsList.Count; i++, c++)
+                    for (int i=0, c=1; i<operatorsList.Count; i++, c++)
                     {
-                        if (operandsList[i] == '*')
+                        if (operatorsList[i] == '*')
                         {
                             listValuesDec[i]=Multiply(listValuesDec[i],listValuesDec[c]);
                             listValuesDec.RemoveAt(c);
-                            operandsList.RemoveAt(i);
+                            operatorsList.RemoveAt(i);
                             break; 
                         }
-                        else if (operandsList[i] == '/')
+                        else if (operatorsList[i] == '/')
                         {
                             listValuesDec[i]=Divide(listValuesDec[i],listValuesDec[c]);
                             listValuesDec.RemoveAt(c);
-                            operandsList.RemoveAt(i); 
+                            operatorsList.RemoveAt(i); 
                             break;
                         }
                     }
@@ -359,32 +285,32 @@ namespace Calculator
             {
                 foreach(decimal i in listValuesDec)
                 {
-                    Console.WriteLine(strippedInput+"="+i);
-                    WriteToFile(strippedInput+"="+i);
+                    Console.WriteLine(strippedInput+"= "+i);
+                    WriteToFile(strippedInput+"= "+i);
                     return;
                 }
             }
 
 
             //Iterate though operands and evaluate + and -
-            operandsLeft = operandsList.Count;
-             for(int j=0; j<operandsLeft; j++)
+            operatorsLeft = operatorsList.Count;
+             for(int j=0; j<operatorsLeft; j++)
             {
                 while (true)
                 {
-                    for (int i=0, c=1; i<operandsList.Count; i++, c++)
+                    for (int i=0, c=1; i<operatorsList.Count; i++, c++)
                     {
-                        if (operandsList[i] == '+')
+                        if (operatorsList[i] == '+')
                         {
                             listValuesDec[i]=Add(listValuesDec[i],listValuesDec[c]);
                             listValuesDec.RemoveAt(c);
-                            operandsList.RemoveAt(i);
+                            operatorsList.RemoveAt(i);
                         }
-                        else if (operandsList[i] == '-')
+                        else if (operatorsList[i] == '-')
                         {
                             listValuesDec[i]=Subtract(listValuesDec[i],listValuesDec[c]);
                             listValuesDec.RemoveAt(c);
-                            operandsList.RemoveAt(i);
+                            operatorsList.RemoveAt(i);
                         }
                     }
                     break;
@@ -396,8 +322,8 @@ namespace Calculator
             {
                 foreach(decimal i in listValuesDec)
                 {
-                    Console.WriteLine(strippedInput+"="+i);
-                    WriteToFile(strippedInput+"="+i);
+                    Console.WriteLine(strippedInput+"= "+i);
+                    WriteToFile(strippedInput+"= "+i);
                     return;
                 }
             }
