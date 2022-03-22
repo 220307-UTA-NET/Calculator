@@ -14,6 +14,7 @@ namespace CalculatorProgram
 			{
                 // These WriteLines get the user to choose an operation with a switch statement.
 				Console.WriteLine("Choose an operation: ");
+                Console.WriteLine("[6] - Read Results of Operations from Saved File");
                 Console.WriteLine("[5] - Clear Operations And Start Over");
 				Console.WriteLine("[4] - Division");
                 Console.WriteLine("[3] - Multiplication");
@@ -37,7 +38,7 @@ namespace CalculatorProgram
                 double? num1;
                 double? num2;
                 double? equation;
-                
+
 				switch (menuItem) // Switch statement for selecting a case with the appropriate number location.
 				{
 					case 0: // Clears the screen and takes the user out of the program.
@@ -65,6 +66,10 @@ namespace CalculatorProgram
 
                     case 5: // Calls the Clear function.
                         Clear();
+                        break;
+
+                    case 6: // Reads results from saved file "Equation.txt"
+                        ReadAll();
                         break;
 
 					default: // Will tell the user of an invalid menu item option and give them the menu options again.
@@ -168,6 +173,12 @@ namespace CalculatorProgram
             using (StreamWriter file = File.CreateText("Equation.txt")) // Clears any equation results from the file by overwriting it with blank text.
             file.WriteLine(""); // Blank text.
             double equation = 0; // Sets the equation operation back to 0.
+        }
+        public static void ReadAll()
+        {
+            StreamReader readAll = new StreamReader("Equation.txt"); // StreamReader reads from Equation.txt in Calculator folder.
+            string toEnd = readAll.ReadToEnd(); // ReadToEnd Method reads every line in the text and we will assign that feature to the variable toEnd.
+            Console.WriteLine(toEnd); // Outputs the variable toEnd.
         }
 	}
 }
