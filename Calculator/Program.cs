@@ -11,7 +11,7 @@ namespace Calculator {
         //a public class
         public static string Opr;
         public static List<double> Numbers = new List<double>(); 
-        public static double Result = 0.0;
+        public static double Result;
         public static string Opt;
         public static string[] Options = {"YES", "Y", "NO", "N"};
         public static string[] Operations = {"addition", "substraction", "multiplication", "division"};
@@ -22,7 +22,8 @@ namespace Calculator {
             string input = "";
             bool isIn = false;
 
-            do {          
+            do {       
+                  //Result = 0.0;   
                   dowhileLoop();
                   switch(Opr) {
                     case "addition":
@@ -32,6 +33,13 @@ namespace Calculator {
                       }
                       Result = tempAdd;
                       displayResult();
+                      //Result = 0;
+                      Console.WriteLine("Enter 0 to exit. Or enter any key for another operation");
+                      input = Console.ReadLine();
+                      if(!(input.Equals("0", StringComparison.OrdinalIgnoreCase))) {
+                         isIn = true;
+                         Numbers.Clear();
+                      }
                       break;
 
                     case "substraction":
@@ -41,6 +49,12 @@ namespace Calculator {
                       }
                       Result = tempSub;
                       displayResult();
+                      Console.WriteLine("Enter 0 to exit. Or enter any key for another operation");
+                      input = Console.ReadLine();
+                      if(!(input.Equals("0", StringComparison.OrdinalIgnoreCase))) {
+                         isIn = true;
+                         Numbers.Clear();
+                      }
                       break;
 
                     case "multiplication":
@@ -50,6 +64,12 @@ namespace Calculator {
                       }
                       Result = tempMul;
                       displayResult();
+                      Console.WriteLine("Enter 0 to exit. Or enter any key for another operation");
+                      input = Console.ReadLine();
+                      if(!(input.Equals("0", StringComparison.OrdinalIgnoreCase))) {
+                         isIn = true;
+                         Numbers.Clear();
+                      }
                       break;
 
                     default: 
@@ -72,7 +92,13 @@ namespace Calculator {
                           }
                           Result = tempDiv;
                           displayResult();
-                          //break;
+                          
+                          Console.WriteLine("Enter 0 to exit. Or enter any key for another operation");
+                          input = Console.ReadLine();
+                          if(!(input.Equals("0", StringComparison.OrdinalIgnoreCase))) {
+                             isIn = true;
+                             Numbers.Clear();
+                          }
                       }
                       break;  
                     }
