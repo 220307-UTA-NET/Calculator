@@ -6,20 +6,16 @@ namespace CalculatorProject
     {
         static void Main(string[] args) 
         {
-        
             while (true)
             {
+                // float fltOutput1;
+                float fltOutput1 = input1();
 
-                // Console.WriteLine ("~~~~~~~~  Calculator  ~~~~~~~~  ");
-
-                float fltOutput1;
-                fltOutput1 = input1();
-
-                string strOutput2;
-                strOutput2 = input2();
+                // string strOutput2;
+                string strOutput2 = input2();
                 
-                float fltOutput3;
-                fltOutput3 = input3();
+                // float fltOutput1;
+                float fltOutput3 = input3();
 
                 CalculationFunc(fltOutput1, strOutput2,fltOutput3);
             
@@ -31,46 +27,34 @@ namespace CalculatorProject
                 {
                     return;
                 }
-
             }
-
         }
-
         static float input1()  // change response to bad input
         {
             Console.Clear();
             while (true)
             {
-                // Console.Clear();
                 Console.WriteLine ("~~~~~~~~  Calculator  ~~~~~~~~ \nPlease Enter Your First Number: ");
-                // Console.WriteLine (" \nPlease Enter Your First Number: ");
           
                 string firstNumber = Console.ReadLine();  
                 float floatNum1;
                 bool success = float.TryParse(firstNumber, out floatNum1);
-                // Console.Clear();
 
                     if (success == true )
                     {
                         float x = float.Parse(firstNumber);
-                        // Console.Clear();
                         return x;
-                        // break;
                     }
                     else
                     {
-                        // Console.WriteLine ("Invalid input. Please try again.");                        
-                        Console.WriteLine (" \nInvalid input. \nPress enter to try again.");
+                        Console.Clear();
+                        Console.WriteLine (" \nInvalid input. \nPlease press enter to try again.");
                         Console.ReadLine();
                         Console.Clear();
-                        // Console.WriteLine ("~~~~~~~~  Calculator  ~~~~~~~~  ");
                     }
                 Console.Clear();
-                // float x = floatNum1;
-                // return x;
             }            
         }
-
         static string input2()
         {
             while (true)
@@ -78,6 +62,7 @@ namespace CalculatorProject
                 string [] validOperations = {"+", "-", "/", "*"};
                 Console.WriteLine (" \nPlease select from the options below the operation you'd like to perform. \nOpperation:       Select: \nAddition:           +\nSubtaction:         -\nDivision:           /\nMultiplication:     * \n  \nOperation: " );
                 string operationInput = Console.ReadLine();
+                // Console.Clear();
 
                 if (validOperations.Contains ( operationInput ))
                 {
@@ -87,15 +72,14 @@ namespace CalculatorProject
                 }
                 else
                 {
-                    Console.WriteLine("Invalid operation selected. Please press enter to review the menu and try again.");
+                        Console.Clear();
+                        Console.WriteLine(" '" + operationInput + "' is an invalid operation. \nPlease press enter to review the menu and try again.");
                         Console.ReadLine();
                         Console.Clear();
                         Console.WriteLine ("~~~~~~~~  Calculator  ~~~~~~~~  ");
                 }
-
             }
         }
-
         static float input3() //use code from this funtion for error message
         {
             while (true)
@@ -108,7 +92,6 @@ namespace CalculatorProject
                     {
                         floatNum2 = float.Parse(secondNumber);
                         return floatNum2;
-                        // break;
                     }
                     else
                     {
@@ -116,42 +99,38 @@ namespace CalculatorProject
                     }
             }                    
         }
-        static void CalculationFunc(float fltOutput1, string strOutput2, float fltOutput3)
+        static void CalculationFunc(float Num_1, string mthOperation, float Num_2)
         {
             while (true)
             {
-                if (strOutput2 == "+")
+                if (mthOperation == "+")
                 {
-                    float answer =  fltOutput1 + fltOutput3;
+                    float answer =  Num_1 + Num_2;
                     Console.Clear();
                     Console.WriteLine ("~~~~~~~~  Calculator  ~~~~~~~~  ");
-                    Console.WriteLine( fltOutput1 + " + " + fltOutput3 + " = " + answer); 
+                    Console.WriteLine( Num_1 + " + " + Num_2 + " = " + answer); 
                 }
-
-                else if (strOutput2 == "-")
+                else if (mthOperation == "-")
                 {
-                    float answer = fltOutput1 - fltOutput3;
+                    float answer = Num_1 - Num_2;
                     Console.Clear();
                     Console.WriteLine ("~~~~~~~~  Calculator  ~~~~~~~~  ");
-                    Console.WriteLine( fltOutput1 + " - " + fltOutput3 + " = " + answer); 
+                    Console.WriteLine( Num_1 + " - " + Num_2 + " = " + answer); 
                 }
-
-                else if (strOutput2 == "/")
+                else if (mthOperation == "/")
                 {
-                    float answer = fltOutput1 / fltOutput3;
+                    float answer = Num_1 / Num_2;
                     Console.Clear();
                     Console.WriteLine ("~~~~~~~~  Calculator  ~~~~~~~~  ");
-                    Console.WriteLine( fltOutput1 + " / " + fltOutput3 + " = " + answer); 
+                    Console.WriteLine( Num_1 + " / " + Num_2 + " = " + answer); 
                 }
-
-                else if (strOutput2 == "*")
+                else if (mthOperation == "*")
                 {
-                    float answer = fltOutput1 * fltOutput3;
+                    float answer = Num_1 * Num_2;
                     Console.Clear();
                     Console.WriteLine ("~~~~~~~~  Calculator  ~~~~~~~~  ");
-                    Console.WriteLine( fltOutput1 + " * " + fltOutput3 + " = " + answer); 
+                    Console.WriteLine( Num_1 + " * " + Num_2 + " = " + answer); 
                 }
-
                 else
                 {
                     Console.WriteLine( "SOMETHING WENT WRONG!!!!!!!!!"); //Don't need
@@ -163,27 +142,4 @@ namespace CalculatorProject
     } 
 }
  
-
-
-
-
-
-
-
-// Create code to use null input to mean "If you'd like to use the calculator, please run program again."
-// Takes in operation and decides if valid or tells user to try again 
-//Console.WriteLine(firstNumber); 
-//Console.Clear();
-//Console.WriteLine();
-//Console.ReadLine(); 
-//Console.WriteLine ("\nPlease Enter the operation you'd like to perform.");
-// if - else statement for invalid operation
-
-
-
-
-
-
-
-
 
