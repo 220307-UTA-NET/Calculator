@@ -63,37 +63,42 @@
          static void Addition()
         {
             Console.WriteLine("Choose a number to begin with: ");
-            double userNum1 = Convert.ToDouble(Console.ReadLine());
+            float userNum1 = float.Parse(Console.ReadLine());
             Console.WriteLine("Add: ");
-            double userNum2 = Convert.ToDouble(Console.ReadLine());
-            double total = (userNum1 + userNum2);
+            float userNum2 = float.Parse(Console.ReadLine());
+            float total = (userNum1 + userNum2);
             Console.WriteLine($"{userNum1} + {userNum2} = {total}");
         }
         static void Subtraction()
         {
             Console.WriteLine("Choose a number to begin with: ");
-            double userNum1 = Convert.ToDouble(Console.ReadLine());
+            float userNum1 = float.Parse(Console.ReadLine());
             Console.WriteLine("Subtract: ");
-            double userNum2 = Convert.ToDouble(Console.ReadLine());
-            double total = (userNum1 - userNum2);
+            float userNum2 = float.Parse(Console.ReadLine());
+            float total = (userNum1 - userNum2);
             Console.WriteLine($"{userNum1} - {userNum2} = {total}");
         }
         static void Multiplication()
         {
             Console.WriteLine("Choose a number to begin with: ");
-            double userNum1 = Convert.ToDouble(Console.ReadLine());
+            float userNum1 = float.Parse(Console.ReadLine());
             Console.WriteLine("Multiply by: ");
-            double userNum2 = Convert.ToDouble(Console.ReadLine());
-            double total = (userNum1 * userNum2);
+            float userNum2 = float.Parse(Console.ReadLine());
+            float total = (userNum1 * userNum2);
             Console.WriteLine($"{userNum1} * {userNum2} = {total}");
         }
         static void Division()
         {
             Console.WriteLine("Choose a number to begin with");
-            double userNum1 = Convert.ToDouble(Console.ReadLine());
+            float userNum1 = float.Parse(Console.ReadLine());
             Console.WriteLine("Divide by: ");
-            double userNum2 = Convert.ToDouble(Console.ReadLine());
-            double total = (userNum1 / userNum2);
+            float userNum2 = float.Parse(Console.ReadLine());
+            while (userNum2 == 0)
+            {
+                Console.WriteLine("Cannot divide by 0. Please pick another number");
+                userNum2 = float.Parse(Console.ReadLine());
+            }
+            float total = (userNum1 / userNum2);
             Console.WriteLine($"{userNum1} / {userNum2} = {total}");
         }
     }
