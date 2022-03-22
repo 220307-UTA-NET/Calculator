@@ -12,30 +12,36 @@ namespace CalculatorApp
 {
     class Calculator
    {
+       
+        //creating a Stack named 'result' data structure to push the results of
+        //the perfomed operations in the stack
         public Stack<double> result = new Stack<double>();
         double ans;
-        // double sum;
-        // double difference;
-        // double product;
-        // double quotient;
+      
+        //adding to numbers
         public void add(double a, double b)
         {
             ans = a + b;
             Console.WriteLine("Sum:{0}", ans);
             result.Push(ans);
         }
+        //subtracting two numbers
         public void subtract(double a, double b)
         {
             ans = a - b;
             Console.WriteLine("Difference:{0}", ans);
             result.Push(ans);
         }
+
+        //multiplying two numbers
         public void multiply(double a, double b)
         {
             ans = a * b;
             Console.WriteLine("Product:{0} ", ans);
             result.Push(ans);
         }
+
+        //dividing two numbers
         public void divide(double a, double b)
         {
             if (b != 0)
@@ -50,16 +56,13 @@ namespace CalculatorApp
             }
         }
        
-        double getTotal()
-        {
-            return ans;
-        }
+        // double getTotal()
+        // {
+        //     return ans;
+        // }
         
         void undo()
         {
-            if(result.Count == 0);
-                Console.WriteLine("UNDO IS NOT AVAILABLE");
-            
             result.Pop();
             ans = result.Pop();
             Console.WriteLine("Running answer:{0}", ans);
@@ -102,6 +105,7 @@ namespace CalculatorApp
                    catch (Exception e)
                    {
                        Console.WriteLine(e.Message );
+                       
                    }
 
                 else if (userSelection.ToLower() == "clear")
