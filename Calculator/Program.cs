@@ -13,7 +13,7 @@ namespace CalculatorApp
     class Calculator
    {
        
-        //creating a Stack named 'result' data structure to push the results of
+        //creating a Stack named 'result' to push the results of
         //the perfomed operations in the stack
         public Stack<double> result = new Stack<double>();
         double ans;
@@ -55,19 +55,17 @@ namespace CalculatorApp
                 Console.WriteLine("Error: Cannot divide by 0");
             }
         }
-       
-        // double getTotal()
-        // {
-        //     return ans;
-        // }
         
+        //printing the previous results, if there is any
         void undo()
         {
             result.Pop();
             ans = result.Pop();
             Console.WriteLine("Running answer:{0}", ans);
         }
-    
+         
+         //deleting all the current and previous results and making the answer to all 
+         //operations zero
         void clear()
         {
             while (result.Count != 0)
@@ -76,6 +74,7 @@ namespace CalculatorApp
             ans = 0;
             Console.WriteLine("Running answer:{0}", ans);
         }
+
         public static void Main(string[] args)
         {
             
