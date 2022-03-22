@@ -39,88 +39,86 @@
                 Console.WriteLine("Invalid Input! Please type the correct input!");
                 break;
             }
-
-            //char op;
-            //op = Console.ReadLine()[0];   
-                    
-           /* Console.WriteLine("Enter the two numbers one by one");
-            Console.WriteLine("Enter the first number");
-            double num1 = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine("Enter the second number");
-            double num2 = Convert.ToDouble(Console.ReadLine());    */       
-
-            /*switch(op)
-            {
-                case '1':
-                    Console.WriteLine("{0} + {1} = {2}", num1, num2, (num1 + num2));
-                    break;
-
-                case '2':
-                    Console.WriteLine("{0} - {1} = {2}", num1, num2, (num1 - num2));
-                    break;
-
-                case '3':
-                    Console.WriteLine("{0} * {1} = {2}", num1, num2, (num1 * num2));
-                    break;
-
-                case '4':
-                    if(num2 == 0.0)
-                    Console.WriteLine("Denominator cannot divide by zero (0)!");
-                    else
-                    Console.WriteLine("{0} / {1} = {2}", num1, num2, (num1 / num2));
-                    break;
-
-                 case '0':
-                    Environment.Exit(0);
-                    break;
-                            
-                default:
-                    Console.WriteLine("Invalid Input! Please type the correct input!", op);
-                    break;
-            }*/
-               
-           // Console.WriteLine("Do you wish you want to continue? Press [1] To continue or press any key to exit"); 
-
         }while(userOperate == true);            
     }  
 
     static void Addition()
     {
-        Console.WriteLine("Enter the first number");
-        double num1 = Convert.ToDouble(Console.ReadLine());
-        Console.WriteLine("Enter the second number");
-        double num2 = Convert.ToDouble(Console.ReadLine());
-        Console.WriteLine("{0} + {1} = {2}", num1, num2, (num1 + num2));
+        try
+        {
+            Console.WriteLine("Enter the first number");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Enter the second number");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("{0} + {1} = {2}", num1, num2, (num1 + num2));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Invalid input! Please Type the valid input!", e);
+        }
+       
     }
 
     static void Subtraction()
     {
-        Console.WriteLine("Enter the first number");
-        double num1 = Convert.ToDouble(Console.ReadLine());
-        Console.WriteLine("Enter the second number");
-        double num2 = Convert.ToDouble(Console.ReadLine());
-        Console.WriteLine("{0} - {1} = {2}", num1, num2, (num1 - num2));
+
+        try
+        {
+            Console.WriteLine("Enter the first number");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Enter the second number");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("{0} - {1} = {2}", num1, num2, (num1 - num2));
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Invalid input! Please Type the valid input!",e);
+        }
+       
     }
 
     static void Multiplcation()
     {
-        Console.WriteLine("Enter the first number");
-        double num1 = Convert.ToDouble(Console.ReadLine());
-        Console.WriteLine("Enter the second number");
-        double num2 = Convert.ToDouble(Console.ReadLine());
-        Console.WriteLine("{0} * {1} = {2}", num1, num2, (num1 * num2));
+
+        try
+        {
+            Console.WriteLine("Enter the first number");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Enter the second number");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("{0} * {1} = {2}", num1, num2, (num1 * num2));
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Invalid input! Please Type the valid input!",e);
+        }
+       
     }
 
     static void Division()
     {
-        Console.WriteLine("Enter the first number");
-        double num1 = Convert.ToDouble(Console.ReadLine());
-        Console.WriteLine("Enter the second number");
-        double num2 = Convert.ToDouble(Console.ReadLine());
+        try
+        {
+            Console.WriteLine("Enter the first number");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+            Console.WriteLine("Enter the second number");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+          
+            try
+            {
+                Console.WriteLine("{0} / {1} = {2}", num1, num2, (num1 / num2));
+            }
+            catch (Exception ze)
+            {
+                Console.WriteLine("Denominator cannot divide by zero (0)!");
+            }         
 
-        if(num2 == 0.0)
-        Console.WriteLine("Denominator cannot divide by zero (0)!");
-        else
-        Console.WriteLine("{0} / {1} = {2}", num1, num2, (num1 / num2));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Invalid input! Please Type the valid input!", e);
+        }       
     }
 }
