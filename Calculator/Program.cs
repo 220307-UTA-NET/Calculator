@@ -57,16 +57,16 @@ namespace CalculatorApp
         }
         
         //printing the previous results, if there is any
-        void undo()
-        {
-            result.Pop();
-            ans = result.Pop();
-            Console.WriteLine("Running answer:{0}", ans);
-        }
+        // public void undo()
+        // {
+        //    // result.Pop();
+        //     ans = result.Pop();
+        //     Console.WriteLine("Running answer:{0}", ans);
+        // }
          
          //deleting all the current and previous results and making the answer to all 
          //operations zero
-        void clear()
+        public void clear()
         {
             while (result.Count != 0)
                   result.Pop();
@@ -82,30 +82,30 @@ namespace CalculatorApp
             string userSelection= "";
             
             Console.WriteLine("\n");
-            Console.WriteLine("Hi! This is a simple Calculator Application \n");
+            Console.WriteLine("Hi! This is a simple Calculator Application. \n");
             Console.WriteLine("This calculator can perform addition, subtraction, multiplication and division. \n\n");
             Console.WriteLine("Instructions: \n");
             Console.WriteLine("enter 'any' key to start calculation\n");
-            Console.WriteLine("if you want to see previous results, enter 'Undo'\n ");
+           // Console.WriteLine("if you want to see previous results, enter 'Undo'\n ");
             Console.WriteLine("if you want to clear previous results, enter 'Clear'\n");
             Console.WriteLine("if you want to quit, enter 'Exit'\n\n");
         
             while (true)
             {
-                Console.WriteLine(" \n Enter (Clear or Undo or Exit or any Expression to start ):");
+                Console.WriteLine(" \n Enter (Clear or Exit or any Expression to start ):");
                 
                 userSelection = Console.ReadLine();
                 if (userSelection.ToLower() == "exit")
                     break;
-                else if (userSelection.ToLower() == "undo")
-                   try{
-                       cal.undo();
-                   }
-                   catch (Exception e)
-                   {
-                       Console.WriteLine(e.Message );
+                // else if (userSelection.ToLower() == "undo")
+                //    try{
+                //        cal.undo();
+                //    }
+                //    catch (Exception e)
+                //    {
+                //        Console.WriteLine(e.Message );
                        
-                   }
+                //    }
 
                 else if (userSelection.ToLower() == "clear")
                     cal.clear();
