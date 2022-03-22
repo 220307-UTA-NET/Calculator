@@ -1,11 +1,12 @@
 using System;
-using System.Collections.Generic;  
+using System.Collections.Generic;
+using System.IO;
 
 namespace CalculatorProgram
 {
-	class CalculatorMenu // Named for the main menu for performing operations.
+	public class CalculatorMenu // Named for the main menu for performing operations.
 	{
-		static void Main(string[] args) // The main function where we call the other functions to perform the operations.
+		public static void Main(string[] args) // The main function where we call the other functions to perform the operations.
 		{
 			Console.WriteLine("This is a Calculator Program!"); // Greets the user.
 
@@ -20,12 +21,23 @@ namespace CalculatorProgram
                 Console.WriteLine("[1] - Addition");
 				Console.WriteLine("[0] - Exit");
 				
-				int menuItem = int.Parse(Console.ReadLine()); // Will try to Parse the menu item option into an integer data type.
+                int? menuItem;
+				string? userInput = Console.ReadLine();
 
-                double num1;
-                double num2;
-                double equation;
+				try
+				{
+					menuItem = int.Parse(userInput); //Read user input, parsing to an int, then save as int "input"
+				}
+				catch (System.Exception mess)
+				{
+					Console.WriteLine(mess.Message + " Exiting Program.");
+					break;
+				}       
 
+                double? num1;
+                double? num2;
+                double? equation;
+                
 				switch (menuItem) // Switch statement for selecting a case with the appropriate number location.
 				{
 					case 0: // Clears the screen and takes the user out of the program.
@@ -62,10 +74,11 @@ namespace CalculatorProgram
 						Console.Clear();
 						break;
 				}
+
 			}
 		}
 
-		static void Addition() // This is where we do the addition function.
+		public static void Addition() // This is where we do the addition function.
 		{   
 
                 Console.WriteLine("Please enter first number: "); 
@@ -80,8 +93,11 @@ namespace CalculatorProgram
 
                 double equation = num1 + num2; // Adds both numbers.
                 Console.WriteLine("Both numbers are equal to " + equation);
+
+                using StreamWriter file = new("Equation.txt", append: true); // Uses StreamWriter to write to a file named Equation in the Calculator folder.
+                file.WriteLine(equation); // Writes the equation variable to the file "Equation"
 		}
-        static void Subtraction() // This is where we do the subtraction function.
+        public static void Subtraction() // This is where we do the subtraction function.
 		{
             
                 Console.WriteLine("Please enter first number: ");
@@ -96,9 +112,12 @@ namespace CalculatorProgram
 
                 double equation = num1 - num2; // Subtracts both numbers.
                 Console.WriteLine("Both numbers are equal to " + equation);
+
+                using StreamWriter file = new("Equation.txt", append: true); // Uses StreamWriter to write to a file named Equation in the Calculator folder.
+                file.WriteLine(equation); // Writes the equation variable to the file "Equation"
             
         }
-        static void Multiplication() // This is where we do the multiplication function.
+        public static void Multiplication() // This is where we do the multiplication function.
         {
         
 
@@ -114,10 +133,13 @@ namespace CalculatorProgram
 
                 double equation = num1 * num2; // Multiplies both numbers.
                 Console.WriteLine("Both numbers are equal to " + equation);
+
+                using StreamWriter file = new("Equation.txt", append: true); // Uses StreamWriter to write to a file named Equation in the Calculator folder.
+                file.WriteLine(equation); // Writes the equation variable to the file "Equation"
             
         }
 
-        static void Division() // This is where we do the division function.
+        public static void Division() // This is where we do the division function.
         {
             
                 Console.WriteLine("Please enter first number: ");
@@ -132,14 +154,19 @@ namespace CalculatorProgram
 
                 double equation = num1 / num2; // Divides both numbers.
                 Console.WriteLine("Both numbers are equal to " + equation);
+
+                using StreamWriter file = new("Equation.txt", append: true); // Uses StreamWriter to write to a file named Equation in the Calculator folder.
+                file.WriteLine(equation); // Writes the equation variable to the file "Equation"
         }
 
-        static void Clear() // This is the equation clear function.
+        public static void Clear() // This is the equation clear function.
         {
             Console.WriteLine("Equation results cleared and starting over. ");
             Console.WriteLine(" ");
             Console.WriteLine("Press Enter to continue. ");
             Console.ReadLine();
+            using (StreamWriter file = File.CreateText("Equation.txt")) // Clears any equation results from the file by overwriting it with blank text.
+            file.WriteLine(""); // Blank text.
             double equation = 0; // Sets the equation operation back to 0.
         }
 	}
