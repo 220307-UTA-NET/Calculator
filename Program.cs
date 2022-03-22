@@ -27,7 +27,7 @@ namespace CalculatorProgram
 
 				try
 				{
-					menuItem = int.Parse(userInput); //Read user input, parsing to an int, then save as int "input"
+					menuItem = int.Parse(userInput); // Save input from user and put that into int "menuItem".
 				}
 				catch (System.Exception mess)
 				{
@@ -141,7 +141,6 @@ namespace CalculatorProgram
 
                 using StreamWriter file = new("Equation.txt", append: true); // Uses StreamWriter to write to a file named Equation in the Calculator folder.
                 file.WriteLine(equation); // Writes the equation variable to the file "Equation"
-            
         }
 
         public static void Division() // This is where we do the division function.
@@ -158,6 +157,7 @@ namespace CalculatorProgram
                 Console.WriteLine(" ");
 
                 double equation = num1 / num2; // Divides both numbers.
+                
                 Console.WriteLine("Both numbers are equal to " + equation);
 
                 using StreamWriter file = new("Equation.txt", append: true); // Uses StreamWriter to write to a file named Equation in the Calculator folder.
