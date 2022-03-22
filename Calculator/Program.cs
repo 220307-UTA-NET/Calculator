@@ -58,7 +58,7 @@ namespace Caculator
 				switch(operand)
 				{
 					case "+":
-						
+						answer = num1 + num2;
 						Console.WriteLine(num1+" "+operand+" "+num2+" = "+answer);
 						break;
 					case "-":
