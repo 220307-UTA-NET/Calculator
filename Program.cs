@@ -141,6 +141,7 @@ namespace CalculatorProgram
 
                 using StreamWriter file = new("Equation.txt", append: true); // Uses StreamWriter to write to a file named Equation in the Calculator folder.
                 file.WriteLine(equation); // Writes the equation variable to the file "Equation"
+
         }
 
         public static void Division() // This is where we do the division function.
@@ -162,6 +163,7 @@ namespace CalculatorProgram
 
                 using StreamWriter file = new("Equation.txt", append: true); // Uses StreamWriter to write to a file named Equation in the Calculator folder.
                 file.WriteLine(equation); // Writes the equation variable to the file "Equation"
+
         }
 
         public static void Clear() // This is the equation clear function.
@@ -176,9 +178,11 @@ namespace CalculatorProgram
         }
         public static void ReadAll()
         {
+            
             StreamReader readAll = new StreamReader("Equation.txt"); // StreamReader reads from Equation.txt in Calculator folder.
             string toEnd = readAll.ReadToEnd(); // ReadToEnd Method reads every line in the text and we will assign that feature to the variable toEnd.
             Console.WriteLine(toEnd); // Outputs the variable toEnd.
+            readAll.Dispose(); // Disposes the StreamReader process so that way we can use StreamWriter again.
         }
 	}
 }
