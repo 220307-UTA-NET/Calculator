@@ -10,13 +10,13 @@ namespace CosmicCalculator
         {
             //The program starts here...
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("-----------------------------");
+            Console.WriteLine("----------------------------------------");
 
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("Welcome to Cosmic Calculator!");
+            Console.WriteLine("**** Welcome to Cosmic Calculator! *****");
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("-----------------------------");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("----------------------------------------");
          
 
             //giving the doubles a starting point at 0
@@ -30,21 +30,31 @@ namespace CosmicCalculator
 				//user choosing their operator to do their equation 
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Please enter a number for your operator.");
+
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("[1] : Add");
+
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("[2] : Substract");
+
+                Console.ForegroundColor = ConsoleColor.Magenta;
                 Console.WriteLine("[3] : Multiply");
+
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("[4] : Divide");
+
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("[0] : Exit");
 
                 //parsing the operator options to integer for the user to choose what they want to perform
-				int menu = int.Parse(Console.ReadLine());
+				int operatorMenu = int.Parse(Console.ReadLine());
+
+                Console.Clear();
 
                 //branching the different operator options expressed in the while loop 
-				switch ( menu )
+				switch ( operatorMenu )
 				{
-					case 0:
-						Console.WriteLine("Press Enter to exit.");
-						Console.ReadLine();				
+					case 0:			
 						Console.Clear();
 						return;
 				
@@ -74,6 +84,7 @@ namespace CosmicCalculator
             }
         }    
 
+        //addition function begin
         static void Addition()
         {
 
@@ -81,39 +92,50 @@ namespace CosmicCalculator
             double num2 = 0;
             double result = num1 + num2;
 
+            //loops users input for performing addition problems
             while (true)
             {
-                //loops users input for performing addition problems
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Enter first number :");
-                num1 = Convert.ToDouble( Console.ReadLine());
-                Console.WriteLine("Enter second number :");
-                num2 = Convert.ToDouble(Console.ReadLine());         
-                result = num1 + num2;         
-                Console.WriteLine("Total is : "+ result);
-                Console.ReadKey();
-                Console.Clear();
 
-
+                try
+                { 
+                    Console.WriteLine("Enter first number:");
+                    num1 = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("Enter second number :");
+                    num2 = Convert.ToDouble(Console.ReadLine());
+                    result = num1 + num2;         
+                    Console.WriteLine("Total is : "+ result);
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                catch (Exception e)
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Oops! Wrong Key. Please try again.");
+                }
+                    
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Do you want to continue? ");
                 Console.WriteLine("[0] : No");
                 Console.WriteLine("[1] : Yes");
+                int operatorMenu = int.Parse(Console.ReadLine());
 
-                int menu = int.Parse(Console.ReadLine());
-
-                switch ( menu )
+                Console.Clear(); 
+                   
+                switch ( operatorMenu )
 				{
-					case 0:
-						Console.WriteLine("Press Enter to exit.");
-						Console.ReadLine();				
-						Console.Clear();
-						return;
+					case 0:			
+						//Console.Clear();
+						//return;
+                        Environment.Exit(0);
+                        return;
+
 
                     case 1:
 						Addition();
 						break;
 
-                    default:
+                   default:
 						Console.WriteLine("Bad input: Input was not a valid option.");
 						Console.WriteLine("Press Enter to continue.");
 						Console.ReadLine();
@@ -126,6 +148,7 @@ namespace CosmicCalculator
 
         }
 
+        //substraction function begin
         static void Substraction()
         {
             double num1 = 0;
@@ -134,32 +157,42 @@ namespace CosmicCalculator
 
             while (true)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
 
-                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Enter first number :");
-                num1 = Convert.ToDouble( Console.ReadLine());
-                Console.WriteLine("Enter second number :");
-                num2 = Convert.ToDouble(Console.ReadLine());         
-                result = num1 - num2;         
-                Console.WriteLine("Total is : "+ result);
-                Console.ReadKey();
-                Console.Clear();
+                try
+                {
 
+                    Console.WriteLine("Enter first number :");
+                    num1 = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("Enter second number :");
+                    num2 = Convert.ToDouble(Console.ReadLine());         
+                    result = num1 - num2;         
+                    Console.WriteLine("Total is : "+ result);
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                catch (Exception e)
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Oops! Wrong Key. Please try again.");
+                }
+
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Do you want to continue? ");
                 Console.WriteLine("[0] : No");
-                Console.WriteLine("[2] : Yes");
+                Console.WriteLine("[1] : Yes");
+                int exit = int.Parse(Console.ReadLine());
+                Console.Clear();
 
-                int menu = int.Parse(Console.ReadLine());
-
-                switch ( menu )
+                switch ( exit )
 				{
-					case 0:
-						Console.WriteLine("Press Enter to exit.");
-						Console.ReadLine();				
-						Console.Clear();
-						return;
+					case 0:				
+						//Console.Clear();
+						//return;
+                        Environment.Exit(0);
+                        return;
 
-                    case 2:
+                    case 1:
 						Substraction();
 						break;
 
@@ -175,6 +208,7 @@ namespace CosmicCalculator
 
         }
 
+         //multiplication function begin
         static void Multiplication()
         {
             double num1 = 0;
@@ -184,30 +218,40 @@ namespace CosmicCalculator
             while (true)
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine("Enter first number :");
-                num1 = Convert.ToDouble( Console.ReadLine());
-                Console.WriteLine("Enter second number :");
-                num2 = Convert.ToDouble(Console.ReadLine());         
-                result = num1 * num2;         
-                Console.WriteLine("Total is : "+ result);
-                Console.ReadKey();
-                Console.Clear();
 
+                try
+                {
+                    Console.WriteLine("Enter first number :");
+                    num1 = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("Enter second number :");
+                    num2 = Convert.ToDouble(Console.ReadLine());         
+                    result = num1 * num2;         
+                    Console.WriteLine("Total is : "+ result);
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                catch (Exception e)
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Oops! Wrong Key. Please try again.");
+                }
+
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Do you want to continue? ");
                 Console.WriteLine("[0] : No");
-                Console.WriteLine("[3] : Yes");
+                Console.WriteLine("[1] : Yes");
+                int exit = int.Parse(Console.ReadLine());
+                Console.Clear();
 
-                int menu = int.Parse(Console.ReadLine());
-
-                switch ( menu )
+                switch ( exit )
 				{
-					case 0:
-						Console.WriteLine("Press Enter to exit.");
-						Console.ReadLine();				
-						Console.Clear();
-						return;
+					case 0:			
+						//Console.Clear();
+						//return;
+                        Environment.Exit(0);
+                        return;
 
-                    case 3:
+                    case 1:
 						Multiplication();
 						break;
 
@@ -222,6 +266,7 @@ namespace CosmicCalculator
             }
         }
 
+        //division function begin
         static void Division()
         {
             double num1 = 0;
@@ -231,31 +276,40 @@ namespace CosmicCalculator
             while (true)
             { 
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Enter first number :");
-                num1 = Convert.ToDouble( Console.ReadLine());
-                Console.WriteLine("Enter second number :");
-                num2 = Convert.ToDouble(Console.ReadLine());         
-                result = num1 / num2;         
-                Console.WriteLine("Total is : "+ result);
-                Console.ReadKey();
-                Console.Clear();
 
+                try
+                {
+                    Console.WriteLine("Enter first number :");
+                    num1 = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("Enter second number :");
+                    num2 = Convert.ToDouble(Console.ReadLine());         
+                    result = num1 / num2;         
+                    Console.WriteLine("Total is : "+ result);
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                catch (Exception e)
+                {
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Oops! Wrong Key. Please try again.");
+                }
 
+                Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("Do you want to continue? ");
                 Console.WriteLine("[0] : No");
-                Console.WriteLine("[4] : Yes");
+                Console.WriteLine("[1] : Yes");
+                int exit = int.Parse(Console.ReadLine());
+                Console.Clear();
 
-                int menu = int.Parse(Console.ReadLine());
-
-                switch ( menu )
+                switch ( exit )
 				{
-					case 0:
-						Console.WriteLine("Press Enter to exit.");
-						Console.ReadLine();				
-						Console.Clear();
-						return;
+					case 0:			
+						//Console.Clear();
+						//return;
+                        Environment.Exit(0);
+                        return;
 
-                    case 4:
+                    case 1:
 						Division();
 						break;
 
