@@ -1,0 +1,4 @@
+The expression was: (-5+2)
+	 The answer was: -3
+The expression was: 2+3
+	 The answer was: 5

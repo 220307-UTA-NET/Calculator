@@ -5,7 +5,7 @@ using System.Text.RegularExpressions; //Allows Regex
 using System.Data; //Data Tables
 using System.Linq.Expressions; //Expressions
 
-//Currently not doing ^ or negative values
+//This code does not do ^ or check most specific order of operations
 namespace Calculations
 {
     class Calculator
@@ -18,18 +18,18 @@ namespace Calculations
 
         public bool invalidChecks(string input)
         {
-            string inputTrimmed = input.Trim(); //Remove outside spaces
-            inputTrimmed = inputTrimmed.Replace(" ", String.Empty).Trim(); //Remove internal spaces
-            bool emptyS = string.IsNullOrEmpty(inputTrimmed); //Check if empty
-            if(emptyS == false)
+            string inputTrimmed = input.Trim();
+            inputTrimmed = inputTrimmed.Replace(" ", String.Empty);
+            bool emptyS = string.IsNullOrEmpty(inputTrimmed);
+            if(emptyS == false) //Loop 1: If expression is not empty or null
             {
                 int value;
-                string firstCharacter = inputTrimmed.Substring(0,1); //Takes first character in string
-                bool integerCheck = int.TryParse(firstCharacter, out value); //Tries to parse first character to integer. Returns boolean
-                if(firstCharacter == "(" || integerCheck == true) //Checks to see if first char is '(' or a number. All else fails
+                string firstCharacter = inputTrimmed.Substring(0,1);
+                bool integerCheck = int.TryParse(firstCharacter, out value);
+                if(firstCharacter == "(" || integerCheck == true || firstCharacter == "-") //Loop 2: If the first character is '(' or an integer
                 {
-                    bool test = Regex.IsMatch(inputTrimmed, "[^0-99+-/%^*()]"); //If includes anything but 0-9 and some specific special characters, it fails out
-                    if(test == false)
+                    bool test = Regex.IsMatch(inputTrimmed, "[^0-99+-/%^*()]");
+                    if(test == false) //Loop 3: If elements in Regex are matched
                     {
                         return true;
                     }
@@ -54,10 +54,13 @@ namespace Calculations
 
         public void operation(string checkedInput, string path)
         {
-            checkedInput = checkedInput.Replace(" ", String.Empty); //Remove internal spaces
+            checkedInput = checkedInput.Replace(" ", String.Empty);
             DataTable dt = new DataTable();
-            var computed = dt.Compute(checkedInput, string.Empty); //Can't do exponents with this
-            Console.WriteLine("The answer is: " + computed);            
+            var computed = dt.Compute(checkedInput, String.Empty); //Can't do exponents with this
+            Console.WriteLine("The answer is: " + computed);      
+            StreamWriter file_append = File.AppendText(path);
+            file_append.WriteLine("The expression was: " + checkedInput + "\n\t The answer was: " + computed);
+            file_append.Close();
         }
 
         public bool switcher()
@@ -70,7 +73,8 @@ namespace Calculations
             }
             else
             {
-                Console.WriteLine("\nClosing...like a boss\nMade with love by Austin <3\n");
+                Console.Clear();
+                Console.WriteLine("\nCalculator was closed...like a boss\nI'll take my paycheck now <3\n");
                 return true;
             }
         }
