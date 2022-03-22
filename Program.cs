@@ -21,11 +21,11 @@ namespace Calculon
             {
                 Console.WriteLine("What kind of input would you like to use?");
                 Console.WriteLine("Options are: ");
-                Console.WriteLine("1.) Standard numbers and operations.");
                 Console.WriteLine("2.) Standard numbers, operations, and parentheses.");
-                Console.WriteLine("3.) Words.");
-                Console.WriteLine("4.) Anything Goes!");
-                Console.WriteLine("5.) Actually, I brought a .txt file, I hope that isn't a problem. UNDER CONSTRUCTION.");
+                Console.WriteLine("1.) Standard numbers and operations.");
+                //Console.WriteLine("3.) Words.");
+                //Console.WriteLine("4.) Anything Goes!");
+                //Console.WriteLine("5.) Actually, I brought a .txt file, I hope that isn't a problem. UNDER CONSTRUCTION.");
                 Console.WriteLine("0.) I came here by mistake, please close this program.");
                 optionVarAttempt = Console.ReadLine();
                 
@@ -36,16 +36,16 @@ namespace Calculon
                 }          
                 else
                 {
-                    throw new Exception("You've tried to enter something other than numbers.");
-                    //Console.WriteLine ("You've tried to enter something other than 0-5, try again.");
-                    //return;
+                    //throw new Exception("You've tried to enter something other than numbers.");
+                    Console.WriteLine ("You've tried to enter something other than 0-2, try again.");
+                    return;
                 }                        
             
-                if ((optionVar > 0) && (optionVar < 5))
+                if ((optionVar > 0) && (optionVar < 3))
                 {
                     useCase = 1;
                 }
-                else if (optionVar == 5)
+                else if (optionVar == 3)
                 {
                     useCase = 2;
                 }
@@ -55,7 +55,7 @@ namespace Calculon
                 }
                 else
                 {
-                    throw new IndexOutOfRangeException(); 
+                    throw new Exception("You've tried to enter something other than numbers, reopen and try again."); 
                 }
 
                 switch ( useCase )
@@ -83,6 +83,11 @@ namespace Calculon
                     Console.WriteLine("The solution: " + mathPhrase + " = " + tempOutput + $".\nPress enter to continue.");
                     Console.ReadKey();
                     Console.Clear();
+                    break;
+                    case 2:
+                    Console.Clear();
+                    Console.WriteLine("You weren't supposed to find this place, this was where the calculator was supposed to digest files and send backa solution file (press enter to return to the menu).");
+                    Console.ReadKey();
                     break;
                 }
             }
