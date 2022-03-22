@@ -13,12 +13,10 @@ namespace Calculator
                 Console.WriteLine("[1] - Input Equation Line");
                 Console.WriteLine("[0] - Exit");
 
-                
-                int menu = int.Parse(Console.ReadLine());
-                
+                string? menu = Console.ReadLine();
                 switch(menu)
                 {
-                    case 1:
+                    case "1":
                         Console.Clear();
                         Console.WriteLine("Enter your equation. \nPlease only use 0-9 as values and + - / * as operands.");
                         string? input = Console.ReadLine();
@@ -27,10 +25,15 @@ namespace Calculator
                         Console.ReadLine();
                         Console.Clear();
                         break;
-                    case 0:
+                    case "0":
                         Console.Clear();
                         Console.WriteLine("Goodbye!");
                         return;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Invalid option.  Please try again.");
+                        break;
+
                 }
                 
             }
@@ -195,7 +198,7 @@ namespace Calculator
 
             static void InputFullEquation(string input)
         {
-            //remover any potential whitespaces
+            //remove any potential whitespaces
             string strippedInput = String.Concat(input.Where(c => !Char.IsWhiteSpace(c)));
 
             
@@ -221,8 +224,7 @@ namespace Calculator
             }
             
             //Parse out values separated by operators
-            List<string> listValues = new List<string>();
-            listValues = strippedInput.Split('+','-','/','*').ToList(); 
+            List <string> listValues = strippedInput.Split('+','-','/','*').ToList(); 
             listValues.RemoveAll(item => item == ""); //remove empty items in list due to +-, --, *-, /-
             List<decimal> listValuesDec = listValues.ConvertAll<decimal>(Convert.ToDecimal); //convert to decimal
 
