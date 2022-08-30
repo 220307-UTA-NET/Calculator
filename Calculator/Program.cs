@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using CalculatorLibrary;
+﻿using CalculatorLibrary;
 
 namespace CalculatorProgram
 {
@@ -21,14 +18,14 @@ namespace CalculatorProgram
             while (true)
             {
                 Console.WriteLine("Please input your arithmetic expression:");
-                string strUserInput = Console.ReadLine();
+                string? strUserInput = Console.ReadLine();
                 if (strUserInput == "Q" || strUserInput == "q")
                 {
                     Console.WriteLine("BYE.");
                     break;
                 }
                 try {
-                    Console.WriteLine($"The result: {Calculator.Calculate(strUserInput)}");
+                    Console.WriteLine($"The result: {Calculator.Calculate(strUserInput!)}");
                 } catch ( Exception e)
                 {
                     Console.WriteLine(e.Message);
